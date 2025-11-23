@@ -2,6 +2,7 @@ package presentation;
 
 import java.awt.CardLayout;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class BadIceCreamGUI extends JFrame
@@ -18,7 +19,7 @@ public class BadIceCreamGUI extends JFrame
 		this.initObjs();
 		
 		this.setVisible(true);
-		this.panelStack.show(this.panel, ViewId.HOME);
+		this.setView(ViewId.HOME);
 	}
 	
 	private void setDefaults ()
@@ -36,7 +37,24 @@ public class BadIceCreamGUI extends JFrame
 		this.panel = new JPanel(this.panelStack);
 		
 		this.panel.add(new HomeView(this), ViewId.HOME);	
+		this.panel.add(new SelectModeView(this), ViewId.SELECT_MODE);	
+
 		this.add(this.panel);
+	}
+	
+	public void unimplementedSorry (final String what)
+	{
+		JOptionPane.showMessageDialog(
+			null,
+			String.format("Sorry but '%s' is not implemented yet! Muning soon :)", what),
+			"Bad way to go :(",
+			JOptionPane.ERROR_MESSAGE
+		);
+	}
+	
+	public void setView (final String viewId)
+	{
+		this.panelStack.show(this.panel, viewId);
 	}
 	
 	public static void main (final String [] args)

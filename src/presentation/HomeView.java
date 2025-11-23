@@ -16,25 +16,43 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.io.File;
 
+enum ModalButtonInfo
+{
+	PLAY ("PLAY", ViewId.SELECT_MODE, 0),
+	SCORES ("SCORES", null, 1),
+	HELP ("HELP", null, 2),
+	CREDITS ("CREDITS", null, 3);
+	
+	private String name;
+	private String viewId;
+	private int position;
+	
+	ModalButtonInfo (final String name, final String viewId, final int position)
+	{
+		this.name = name;
+		this.viewId = viewId;
+		this.position = position;
+	}
+	
+	public String getName () { return this.name; }
+	public String getViewId () { return this.viewId; }
+	public int getPosition () { return this.position; }
+}
+
 public class HomeView extends JPanel
 {
 	private static final int MODAL_WIN_HEIGHT = (int) (BadIceCreamGUI.WINDOW_HEIGHT / 3);
 	private static final int MODAL_WIN_WIDTH = (int) (BadIceCreamGUI.WINDOW_WIDHT / 2);
 	
 	private static final int MODAL_NO_BUTTONS = 4;
-
+	
 	private Image background;
 	private JPanel glass;
 	private JPanel modal;
 
 	private JButton startBtn;
-	private JButton [] options;
+	private JButton [] buttons;
 	
-	private JButton playBtn;
-	private JButton scoreBtn;
-	private JButton helpBtn;
-	private JButton creditsBtn;
-		
 	public HomeView (final BadIceCreamGUI mwin)
 	{
 		this.setLayout(null);
@@ -43,19 +61,19 @@ public class HomeView extends JPanel
 		this.initStartButton();
 	}
 
-	private void initGlass (final BadIceCreamGUI window)
+	private void initGlass (final BadIceCreamGUI main)
 	{
 		this.glass =  new JPanel(null);
 		this.glass.setBackground(new Color(0, 0, 0, 150));
 		this.glass.addMouseListener(new MouseAdapter() {});
 
-		this.initModal();	
+		this.initModal(main);
 
 		this.glass.add(this.modal);
-		window.setGlassPane(this.glass);
+		main.setGlassPane(this.glass);
 	}
 	
-	private void initModal ()
+	private void initModal (final BadIceCreamGUI main)
 	{
 		this.modal = new JPanel();
 		this.modal.setLayout(new GridLayout(MODAL_NO_BUTTONS, 1));
@@ -69,48 +87,55 @@ public class HomeView extends JPanel
 
 		this.modal.setBackground(BadColors.BACKGROUND);
 		this.modal.setBorder(BorderFactory.createLineBorder(BadColors.BORDER, 6));
-		this.initModalButtons();
+		this.initModalButtons(main);
 	}
 	
-	private void initModalButtons ()
+	private void initModalButtons (final BadIceCreamGUI main)
 	{
-	    final String [] titles = {
-	        "PLAY",
-	        "SCORES",
-	        "HELP",
-	        "CREDITS"
-	    };
+		final ModalButtonInfo [] info = {
+			ModalButtonInfo.PLAY,
+			ModalButtonInfo.SCORES,
+			ModalButtonInfo.HELP,
+			ModalButtonInfo.CREDITS
+		};
+		
+		this.buttons = new JButton[MODAL_NO_BUTTONS];
+		for (int i = 0; i < MODAL_NO_BUTTONS; i++)
+		{
+			final JButton button = new JButton(info[i].getName());
+			button.setFont(BadFont.MID_BUTTON);
+			
+			button.setOpaque(false);
+			button.setContentAreaFilled(false);
+			button.setBorderPainted(false);
+			button.setFocusPainted(false);
+			
+			this.buttons[i] = button;
+			button.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseEntered (final MouseEvent e) { button.setFont(BadFont.MID_BUTTON_ON_HOVER); }
 
-	    this.options = new JButton[MODAL_NO_BUTTONS];
-	    
-	    for (int i = 0; i < MODAL_NO_BUTTONS; i++)
-	    {
-	        JButton btn = new JButton(titles[i]);
-	        btn.setFont(BadFont.MID_BUTTON);
-
-	        btn.setOpaque(false);
-	        btn.setContentAreaFilled(false);
-	        btn.setBorderPainted(false);
-	        btn.setFocusPainted(false);
-
-	        this.options[i] = btn;
-
-	        btn.addMouseListener(new java.awt.event.MouseAdapter() {
-	            @Override
-	            public void mouseEntered(java.awt.event.MouseEvent e) {
-	                btn.setFont(BadFont.MID_BUTTON_ON_HOVER);
-	            }
-
-	            @Override
-	            public void mouseExited(java.awt.event.MouseEvent e) {
-	                btn.setFont(BadFont.MID_BUTTON);
-	            }
-	        });
-
-	        this.modal.add(btn);
-	    }
+				@Override
+				public void mouseExited (final MouseEvent e) { button.setFont(BadFont.MID_BUTTON); }
+			});
+			
+			final int nthOpt = info[i].getPosition();
+			this.buttons[i].addActionListener(e -> {
+				final String action = info[nthOpt].getViewId();
+				
+				if (action == null)
+				{
+					main.unimplementedSorry(button.getName());
+					return;
+				}
+				
+				this.glass.setVisible(false);
+				main.setView(action);
+			});
+			
+			this.modal.add(button);
+		}
 	}
-
 	
 	private void initStartButton ()
 	{
