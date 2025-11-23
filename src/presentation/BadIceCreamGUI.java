@@ -1,4 +1,4 @@
-package tests;
+package presentation;
 
 import java.awt.CardLayout;
 import javax.swing.JFrame;
@@ -38,7 +38,6 @@ public class BadIceCreamGUI extends JFrame
 		this.panel.add(new HomeView(this), ViewId.HOME);	
 		this.add(this.panel);
 	}
-	
 	
 	public static void main (final String [] args)
 	{

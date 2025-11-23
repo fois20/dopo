@@ -1,4 +1,4 @@
-package tests;
+package presentation;
 
 public class ViewId
 {
