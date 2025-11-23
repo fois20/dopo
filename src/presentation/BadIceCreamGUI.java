@@ -1,6 +1,8 @@
 package presentation;
 
 import java.awt.CardLayout;
+
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -56,7 +58,7 @@ public class BadIceCreamGUI extends JFrame
 	{
 		this.panelStack.show(this.panel, viewId);
 	}
-	
+		
 	public static void main (final String [] args)
 	{
 		final BadIceCreamGUI gui = new BadIceCreamGUI();

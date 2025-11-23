@@ -1,52 +1,21 @@
 package presentation;
 
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.GridBagLayout;
+import java.awt.Cursor;
 import java.awt.GridLayout;
-import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import java.io.File;
 
-enum ModalButtonInfo
-{
-	PLAY ("PLAY", ViewId.SELECT_MODE, 0),
-	SCORES ("SCORES", null, 1),
-	HELP ("HELP", null, 2),
-	CREDITS ("CREDITS", null, 3);
-	
-	private String name;
-	private String viewId;
-	private int position;
-	
-	ModalButtonInfo (final String name, final String viewId, final int position)
-	{
-		this.name = name;
-		this.viewId = viewId;
-		this.position = position;
-	}
-	
-	public String getName () { return this.name; }
-	public String getViewId () { return this.viewId; }
-	public int getPosition () { return this.position; }
-}
-
-public class HomeView extends JPanel
+public class HomeView extends AnimatedBackgroundPanel
 {
 	private static final int MODAL_WIN_HEIGHT = (int) (BadIceCreamGUI.WINDOW_HEIGHT / 3);
 	private static final int MODAL_WIN_WIDTH = (int) (BadIceCreamGUI.WINDOW_WIDHT / 2);
 	
 	private static final int MODAL_NO_BUTTONS = 4;
 	
-	private Image background;
 	private JPanel glass;
 	private JPanel modal;
 
@@ -55,8 +24,8 @@ public class HomeView extends JPanel
 	
 	public HomeView (final BadIceCreamGUI mwin)
 	{
+		super(Assets.HOME_ANIMATION);
 		this.setLayout(null);
-		this.background = new ImageIcon("assets/home-animation.gif").getImage();	
 		this.initGlass(mwin);
 		this.initStartButton();
 	}
@@ -75,7 +44,7 @@ public class HomeView extends JPanel
 	
 	private void initModal (final BadIceCreamGUI main)
 	{
-		this.modal = new JPanel();
+		this.modal = Generics.createGoldPanel(6);
 		this.modal.setLayout(new GridLayout(MODAL_NO_BUTTONS, 1));
 		
 		this.modal.setBounds(
@@ -85,67 +54,46 @@ public class HomeView extends JPanel
 			MODAL_WIN_HEIGHT
 		);
 
-		this.modal.setBackground(BadColors.BACKGROUND);
-		this.modal.setBorder(BorderFactory.createLineBorder(BadColors.BORDER, 6));
 		this.initModalButtons(main);
 	}
 	
 	private void initModalButtons (final BadIceCreamGUI main)
 	{
-		final ModalButtonInfo [] info = {
-			ModalButtonInfo.PLAY,
-			ModalButtonInfo.SCORES,
-			ModalButtonInfo.HELP,
-			ModalButtonInfo.CREDITS
+		final ButtonInfo [] info = {
+			new ButtonInfo("PLAY", ViewId.SELECT_MODE, 0),
+			new ButtonInfo ("SCORES", null, 1),
+			new ButtonInfo ("HELP", null, 2),
+			new ButtonInfo ("CREDITS", null, 3)
 		};
 		
-		this.buttons = new JButton[MODAL_NO_BUTTONS];
 		for (int i = 0; i < MODAL_NO_BUTTONS; i++)
 		{
-			final JButton button = new JButton(info[i].getName());
-			button.setFont(BadFont.MID_BUTTON);
+			final JButton button = Generics.createButton(info[i].getName(), BadFonts.MID, 0);
 			
-			button.setOpaque(false);
-			button.setContentAreaFilled(false);
-			button.setBorderPainted(false);
-			button.setFocusPainted(false);
-			
-			this.buttons[i] = button;
-			button.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseEntered (final MouseEvent e) { button.setFont(BadFont.MID_BUTTON_ON_HOVER); }
-
-				@Override
-				public void mouseExited (final MouseEvent e) { button.setFont(BadFont.MID_BUTTON); }
-			});
+			Generics.addHoverEffectOnButton(button, BadFonts.MID, BadFonts.MID_HOVER);
 			
 			final int nthOpt = info[i].getPosition();
-			this.buttons[i].addActionListener(e -> {
-				final String action = info[nthOpt].getViewId();
+			button.addActionListener(e -> {
+				final String view = info[nthOpt].getViewId();
 				
-				if (action == null)
+				if (view == null)
 				{
 					main.unimplementedSorry(button.getName());
 					return;
 				}
 				
 				this.glass.setVisible(false);
-				main.setView(action);
+				main.setView(view);
 			});
 			
+			button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			this.modal.add(button);
 		}
 	}
 	
 	private void initStartButton ()
 	{
-		this.startBtn = new JButton("CLICK TO LICK");
-		
-		this.startBtn.setFont(BadFont.BIG_BUTTON);
-		this.startBtn.setFocusPainted(false);
-		this.startBtn.setBackground(new Color(248, 242, 226));
-		
-		this.startBtn.setBorder(BorderFactory.createLineBorder(BadColors.BORDER, 3));
+		this.startBtn = Generics.createButton("CLICK TO LICK", BadFonts.BIG, 5);
 
 		this.startBtn.setBounds(
 			(BadIceCreamGUI.WINDOW_WIDHT - 200) / 2,
@@ -156,12 +104,5 @@ public class HomeView extends JPanel
 		
 		this.startBtn.addActionListener(e -> this.glass.setVisible(true));
 		this.add(this.startBtn);
-	}
-		
-	@Override
-	protected void paintComponent (final Graphics g)
-	{
-		super.paintComponent(g);
-		g.drawImage(this.background, 0, 0, this.getWidth(), this.getHeight(), this);
-	}
+	}		
 }
