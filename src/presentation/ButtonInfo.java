@@ -1,8 +1,10 @@
-/* This class implements a simple context for the creation and implementation of buttons
+/**
+ * This class implements a simple context for the creation and implementation of buttons
  * in the program, info such as: name (button text), the id of the view where it has to
- * jump whenever it's clicked and a position since this class is used by groups of bottons
+ * jump whenever it's clicked and a position within the array it belongs to since this
+ * class is used by groups of bottons
  * 
- * @author juan diego patino munoz
+ * @author juand
  */
 package presentation;
 
@@ -10,7 +12,7 @@ public class ButtonInfo
 {
 	private String name;
 	private String viewId;
-	private int position;
+	private int    position;
 	
 	public ButtonInfo (final String name, final String viewId, final int position)
 	{

@@ -1,4 +1,5 @@
-/* Since my project does not have all of the sprites from the original project
+/**
+ * Since my project does not have all of the sprites from the original project
  * i need to improvise, so i use hovering to let the user to know they're over
  * a button, i need fonts as well ymwim?
  * 
@@ -11,15 +12,12 @@ import java.io.File;
 
 public class BadFonts
 {
-	public static final Font BIG;
-
+	public static final Font SMALL;
 	public static final Font MID;
 	public static final Font MID_HOVER;
-	
-	public static final Font SMALL;
-	
+	public static final Font BIG;
 	public static final Font IN_GAME;
-	
+
 	static
 	{
 		Font base = new Font("Arial", Font.BOLD, 20);
@@ -27,13 +25,13 @@ public class BadFonts
 		{
 			base = Font.createFont(Font.TRUETYPE_FONT, new File(Assets.FONT));
 		} catch (final Exception e) {}
-		
-		BIG = base.deriveFont(25f);
-		MID = base.deriveFont(15f);
+
+		SMALL     = base.deriveFont(10f);
+		MID       = base.deriveFont(15f);
 		MID_HOVER = MID.deriveFont(Font.BOLD).deriveFont(19.5f);
-		SMALL = base.deriveFont(10f);
-		IN_GAME = base.deriveFont(Font.BOLD).deriveFont(35f);
+		BIG       = base.deriveFont(25f);
+		IN_GAME   = base.deriveFont(Font.BOLD).deriveFont(35f);
 	}	
-	
+
 	private BadFonts () {}
 }

@@ -1,13 +1,13 @@
-/* This is the class where all starts, it creates the unique JFrame and all the
+/**
+ * This is the class where all starts, it creates the unique JFrame and all the
  * possible JPanels that will be used throughout the execution of the program
  * 
- * @author juan diego patino munoz
+ * @author juand
  */
 package presentation;
 
 import java.awt.CardLayout;
 import java.awt.Dimension;
-
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -18,12 +18,18 @@ public class BadIceCreamGUI extends JFrame implements Nav
 	private static final String TITLE = "Bad Dopo Cream - An expensive clon";
 	
 	public static final int WINDOW_HEIGHT = 758;
-	public static final int WINDOW_WIDHT = 735;
+	public static final int WINDOW_WIDHT  = 735;
 	
 	private CardLayout panelStack;
-	private JPanel panel;
-	private Control control;
+	private JPanel     panel;
+	private Control    control;
 	
+	/**
+	 * Since from here is where all the visual part begins, we need to have a reference
+	 * to the controller so we can pass it to the future children
+	 *
+	 * @param control controller object for future operations
+	 */
 	public BadIceCreamGUI (final Control control)
 	{	
 		this.setDefaults();
@@ -61,14 +67,9 @@ public class BadIceCreamGUI extends JFrame implements Nav
 	@Override
 	public void error (final String errmsg)
 	{
-		JOptionPane.showMessageDialog(
-			null,
-			errmsg,
-			"Bad way to go :(",
-			JOptionPane.ERROR_MESSAGE
-		);
+		JOptionPane.showMessageDialog(null, errmsg, "Bad way to go :(", JOptionPane.ERROR_MESSAGE);
 	}
-	
+
 	@Override
 	public void setView (final String viewId)
 	{
@@ -77,7 +78,7 @@ public class BadIceCreamGUI extends JFrame implements Nav
 
 	@Override
 	public Control getController ()
-	{		
+	{
 		return this.control;
 	}
 		
