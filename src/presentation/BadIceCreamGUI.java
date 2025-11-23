@@ -6,10 +6,10 @@
 package presentation;
 
 import java.awt.CardLayout;
-
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import domain.Control;
 
 public class BadIceCreamGUI extends JFrame implements Nav
 {
@@ -20,10 +20,12 @@ public class BadIceCreamGUI extends JFrame implements Nav
 	
 	private CardLayout panelStack;
 	private JPanel panel;
+	private Control control;
 	
-	public BadIceCreamGUI ()
+	public BadIceCreamGUI (final Control control)
 	{	
 		this.setDefaults();
+		this.control = control;
 		this.initObjs();
 		
 		this.setVisible(true);
@@ -68,9 +70,16 @@ public class BadIceCreamGUI extends JFrame implements Nav
 	{
 		this.panelStack.show(this.panel, viewId);
 	}
+
+	@Override
+	public Control getController ()
+	{		
+		return this.control;
+	}
 		
 	public static void main (final String [] args)
 	{
-		new BadIceCreamGUI();
-	}
+		final Control controller = new Control();
+		new BadIceCreamGUI(controller);
+	}	
 }

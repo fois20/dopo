@@ -6,8 +6,11 @@
  */
 package presentation;
 
+import domain.Control;
+
 public interface Nav
 {
 	void setView (final String viewId);
 	void error (final String errmsg);
+	Control getController ();
 }

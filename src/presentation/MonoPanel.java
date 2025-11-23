@@ -15,10 +15,12 @@ public abstract class MonoPanel extends GifPanel
 	
 	protected JButton backBtn;
 	protected JPanel info;
+	protected Nav nav;
 	
-	public MonoPanel (final String title)
+	public MonoPanel (final String title, final Nav nav)
 	{
 		super(Assets.SNOW_ANIMATION);
+		this.nav = nav;
 		this.setLayout(new GridBagLayout());
 		this.setUpBasics(title);
 		this.add(this.main);
