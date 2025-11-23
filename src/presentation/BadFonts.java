@@ -1,3 +1,9 @@
+/* Since my project does not have all of the sprites from the original project
+ * i need to improvise, so i use hovering to let the user to know they're over
+ * a button, i need fonts as well ymwim?
+ * 
+ * @author juan diego patino munoz
+ */
 package presentation;
 
 import java.awt.Font;

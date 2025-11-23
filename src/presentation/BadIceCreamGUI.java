@@ -1,19 +1,23 @@
+/* This is the class where all starts, it creates the unique JFrame and all the
+ * possible JPanels that will be used throughout the execution of the program
+ * 
+ * @author juan diego patino munoz
+ */
 package presentation;
 
 import java.awt.CardLayout;
 
-import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class BadIceCreamGUI extends JFrame
+public class BadIceCreamGUI extends JFrame implements Nav
 {
 	public static int WINDOW_HEIGHT = 800;
 	public static int WINDOW_WIDHT = 800;
 	
 	private CardLayout panelStack;
-	private JPanel     panel;
+	private JPanel panel;
 	
 	public BadIceCreamGUI ()
 	{	
@@ -40,10 +44,12 @@ public class BadIceCreamGUI extends JFrame
 		
 		this.panel.add(new HomeView(this), ViewId.HOME);	
 		this.panel.add(new SelectModeView(this), ViewId.SELECT_MODE);	
+		this.panel.add(new PickFlavourView(this), ViewId.PICK_FLAVOUR);
 
 		this.add(this.panel);
 	}
 	
+	@Override
 	public void unimplementedSorry (final String what)
 	{
 		JOptionPane.showMessageDialog(
@@ -54,6 +60,7 @@ public class BadIceCreamGUI extends JFrame
 		);
 	}
 	
+	@Override
 	public void setView (final String viewId)
 	{
 		this.panelStack.show(this.panel, viewId);
@@ -61,6 +68,6 @@ public class BadIceCreamGUI extends JFrame
 		
 	public static void main (final String [] args)
 	{
-		final BadIceCreamGUI gui = new BadIceCreamGUI();
+		new BadIceCreamGUI();
 	}
 }

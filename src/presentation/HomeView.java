@@ -1,26 +1,28 @@
+/* Implements the home view and its modal window which provides a serie
+ * of buttons to perform different actions (play, scores, help and credits)
+ * 
+ * @author juan diego patino munoz
+ */
 package presentation;
 
 import java.awt.Color;
+
 import java.awt.Cursor;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-public class HomeView extends AnimatedBackgroundPanel
+public class HomeView extends GifPanel
 {
 	private static final int MODAL_WIN_HEIGHT = (int) (BadIceCreamGUI.WINDOW_HEIGHT / 3);
 	private static final int MODAL_WIN_WIDTH = (int) (BadIceCreamGUI.WINDOW_WIDHT / 2);
-	
 	private static final int MODAL_NO_BUTTONS = 4;
 	
 	private JPanel glass;
 	private JPanel modal;
-
 	private JButton startBtn;
-	private JButton [] buttons;
 	
 	public HomeView (final BadIceCreamGUI mwin)
 	{

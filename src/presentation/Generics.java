@@ -1,3 +1,8 @@
+/* This class implements generic components or at least stuff that is repetitive
+ * and boring to do over and over again
+ * 
+ * @author juan diego patino munoz
+ */
 package presentation;
 
 import java.awt.Cursor;

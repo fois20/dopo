@@ -1,16 +1,21 @@
+/* This class provides a simple template for other classes to use.
+ * The main idea is to implement the background so the children
+ * does not have to repeat the same code over and over again
+ * 
+ * @author juan diego patino munoz
+ */
 package presentation;
 
 import java.awt.Graphics;
 import java.awt.Image;
-
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
-public class AnimatedBackgroundPanel extends JPanel
+public class GifPanel extends JPanel
 {
 	protected Image background;
 	
-	public AnimatedBackgroundPanel (final String path)
+	public GifPanel (final String path)
 	{
 		this.background = new ImageIcon(path).getImage();
 	}

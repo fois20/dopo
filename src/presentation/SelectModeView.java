@@ -1,3 +1,8 @@
+/* Implements the view which shows the user the available munimodes and the option
+ * to go back to the main view (HomeView.java)
+ * 
+ * @author juan diego patino munoz
+ */
 package presentation;
 
 import java.awt.BorderLayout;
@@ -14,71 +19,47 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class SelectModeView extends AnimatedBackgroundPanel
+public class SelectModeView extends BiPanel
 {
-	private JPanel mainContainer;
-	private JPanel selectionBox;
-	private JPanel backBox;
-	
-	public SelectModeView (final BadIceCreamGUI main)
+	public SelectModeView (final Nav nav)
 	{
-		super(Assets.SNOW_ANIMATION);
-		this.setLayout(new GridBagLayout());
-		this.setUpMainContainer(main);
-		this.add(this.mainContainer);
+		super(nav);
 	}
-	
-	private void setUpMainContainer (final BadIceCreamGUI main)
+
+	@Override
+	protected void setUpInformationalContainer()
 	{
-		this.mainContainer = new JPanel();
-		this.mainContainer.setLayout(new BoxLayout(this.mainContainer, BoxLayout.Y_AXIS));
-		this.mainContainer.setOpaque(false);
-		
-		this.setUpModesContainer(main);
-		this.setUpBackContainer(main);
-		
-		this.mainContainer.add(this.selectionBox);
-        this.mainContainer.add(Box.createVerticalStrut(15));
-		this.mainContainer.add(this.backBox);
-	}
-	
-	private void setUpModesContainer (final BadIceCreamGUI main)
-	{
-		this.selectionBox = Generics.createGoldPanel(4);
-		this.selectionBox.setLayout(new BoxLayout(selectionBox, BoxLayout.Y_AXIS));
+		this.info = Generics.createGoldPanel(4);
+		this.info.setLayout(new BoxLayout(info, BoxLayout.Y_AXIS));
 		
 		final JLabel title = new JLabel("PICK A MODE!");
 		title.setFont(BadFonts.BIG);
 		title.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
-		final JPanel playersContainer = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 30));
-		playersContainer.setOpaque(false);
-		this.setUpButtons(playersContainer, main);
+		final JPanel modes = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 30));
+		modes.setOpaque(false);
+		this.setUpButtons(modes);
 		
-		this.selectionBox.add(Box.createVerticalStrut(15));
-		this.selectionBox.add(title);
-		this.selectionBox.add(Box.createVerticalStrut(15));
-		this.selectionBox.add(playersContainer);
-		this.selectionBox.add(Box.createVerticalStrut(15));
+		this.info.add(Box.createVerticalStrut(15));
+		this.info.add(title);
+		this.info.add(Box.createVerticalStrut(15));
+		this.info.add(modes);
+		this.info.add(Box.createVerticalStrut(15));
 	}
-	
-	private void setUpBackContainer (final BadIceCreamGUI main)
+
+	@Override
+	protected void indicateBackAction ()
 	{
-		this.backBox = Generics.createGoldPanel(4);
-		this.backBox.setLayout(new FlowLayout(FlowLayout.CENTER));
-		
-		final JButton goBack = Generics.createButton("BACK", BadFonts.MID, 0);
-		goBack.addActionListener(e -> {
-			main.setView(ViewId.HOME);
+		this.backBtn.addActionListener(e -> {
+			this.nav.setView(ViewId.HOME);
 		});
-		this.backBox.add(goBack);
 	}
-	
-	private void setUpButtons (final JPanel panel, final BadIceCreamGUI main)
+
+	private void setUpButtons (final JPanel panel)
 	{
 		final ButtonInfo [] info = {
-			new ButtonInfo("P vs M", ViewId.PICK_FLAVOUR_1, 0),
-			new ButtonInfo("P vs M", null, 1),
+			new ButtonInfo("P vs M", ViewId.PICK_FLAVOUR, 0),
+			new ButtonInfo("P vs P", null, 1),
 			new ButtonInfo("M vs M", null, 2)
 		};
 		
@@ -97,11 +78,11 @@ public class SelectModeView extends AnimatedBackgroundPanel
 				final String view = info[nthOpt].getViewId();
 				if (view == null)
 				{
-					main.unimplementedSorry(button.getName());
+					this.nav.unimplementedSorry(button.getName());
 					return;
 				}
 				
-				main.setView(view);
+				this.nav.setView(view);
 			});
 			panel.add(button);
 		}
