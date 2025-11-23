@@ -9,5 +9,5 @@ package presentation;
 public interface Nav
 {
 	void setView (final String viewId);
-	void unimplementedSorry (final String what);
+	void error (final String errmsg);
 }

@@ -14,6 +14,8 @@ import java.awt.event.MouseAdapter;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import domain.BadIceCreamException;
+
 public class HomeView extends GifPanel
 {
 	private static final int MODAL_WIN_HEIGHT = (int) (BadIceCreamGUI.WINDOW_HEIGHT / 3);
@@ -46,7 +48,7 @@ public class HomeView extends GifPanel
 	
 	private void initModal (final BadIceCreamGUI main)
 	{
-		this.modal = Generics.createGoldPanel(6);
+		this.modal = Generics.createGoldPanel(Constants.BIG_BORDER_THICKNESS);
 		this.modal.setLayout(new GridLayout(MODAL_NO_BUTTONS, 1));
 		
 		this.modal.setBounds(
@@ -70,22 +72,23 @@ public class HomeView extends GifPanel
 		
 		for (int i = 0; i < MODAL_NO_BUTTONS; i++)
 		{
-			final JButton button = Generics.createButton(info[i].getName(), BadFonts.MID, 0);
-			
+			final JButton button = Generics.createButton(info[i].getName(), BadFonts.MID, Constants.NO_BORDER_THICKNESS);
 			Generics.addHoverEffectOnButton(button, BadFonts.MID, BadFonts.MID_HOVER);
 			
 			final int nthOpt = info[i].getPosition();
 			button.addActionListener(e -> {
-				final String view = info[nthOpt].getViewId();
-				
-				if (view == null)
+				try
 				{
-					main.unimplementedSorry(button.getName());
-					return;
-				}
-				
-				this.glass.setVisible(false);
-				main.setView(view);
+					final String view = info[nthOpt].getViewId();
+					
+					if (view == null)
+					{
+						throw new BadIceCreamException(BadIceCreamException.ACTION_NO_IMPLEMENTED);
+					}
+
+					this.glass.setVisible(false);
+					main.setView(view);
+				} catch (final BadIceCreamException ex) { main.error(ex.getMessage()); }
 			});
 			
 			button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -95,7 +98,7 @@ public class HomeView extends GifPanel
 	
 	private void initStartButton ()
 	{
-		this.startBtn = Generics.createButton("CLICK TO LICK", BadFonts.BIG, 5);
+		this.startBtn = Generics.createButton("CLICK TO LICK", BadFonts.BIG, Constants.BIG_BORDER_THICKNESS);
 
 		this.startBtn.setBounds(
 			(BadIceCreamGUI.WINDOW_WIDHT - 200) / 2,

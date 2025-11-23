@@ -13,8 +13,10 @@ import javax.swing.JPanel;
 
 public class BadIceCreamGUI extends JFrame implements Nav
 {
-	public static int WINDOW_HEIGHT = 800;
-	public static int WINDOW_WIDHT = 800;
+	private static final String TITLE = "Bad Dopo Cream - An expensive clon";
+	
+	public static final int WINDOW_HEIGHT = 800;
+	public static final int WINDOW_WIDHT = 800;
 	
 	private CardLayout panelStack;
 	private JPanel panel;
@@ -31,7 +33,7 @@ public class BadIceCreamGUI extends JFrame implements Nav
 	private void setDefaults ()
 	{
 		this.setSize(WINDOW_HEIGHT, WINDOW_WIDHT);
-		this.setTitle("Bad Dopo Cream (An expensive clon of bad ice cream)");
+		this.setTitle(TITLE);
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -45,16 +47,17 @@ public class BadIceCreamGUI extends JFrame implements Nav
 		this.panel.add(new HomeView(this), ViewId.HOME);	
 		this.panel.add(new SelectModeView(this), ViewId.SELECT_MODE);	
 		this.panel.add(new PickFlavourView(this), ViewId.PICK_FLAVOUR);
+		this.panel.add(new SelectLevelView(this), ViewId.SELECT_LEVEL);
 
 		this.add(this.panel);
 	}
 	
 	@Override
-	public void unimplementedSorry (final String what)
+	public void error (final String errmsg)
 	{
 		JOptionPane.showMessageDialog(
 			null,
-			String.format("Sorry but '%s' is not implemented yet! Muning soon :)", what),
+			errmsg,
 			"Bad way to go :(",
 			JOptionPane.ERROR_MESSAGE
 		);

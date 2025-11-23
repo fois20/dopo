@@ -21,12 +21,13 @@ import java.awt.event.MouseEvent;
 
 public class PickFlavourView extends BiPanel
 {
-	private JButton lastPicked;
+	private static final String TITLE = "PICK UR FLAVOUR!";
+	private Nav nav;
 	
 	public PickFlavourView (final Nav nav)
 	{
-		super(nav);
-		this.lastPicked = null;
+		super();
+		this.nav = nav;
 	}
 
 	@Override
@@ -35,7 +36,7 @@ public class PickFlavourView extends BiPanel
 		this.info = Generics.createGoldPanel(4);
 		this.info.setLayout(new BoxLayout(info, BoxLayout.Y_AXIS));
 		
-		final JLabel title = new JLabel("PICK UR FLAVOUR!");
+		final JLabel title = new JLabel(TITLE);
 		title.setFont(BadFonts.BIG);
 		title.setAlignmentX(Component.CENTER_ALIGNMENT);	
 		
@@ -43,19 +44,19 @@ public class PickFlavourView extends BiPanel
 		this.info.add(title);
 		this.info.add(Box.createVerticalStrut(15));
 		
-		final JPanel flavs = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 30));
+		final JPanel flavs = new JPanel(new FlowLayout(FlowLayout.CENTER, Constants.MED_PADDING, Constants.MED_PADDING));
 		flavs.setOpaque(false);
 		
 		this.showButtons(flavs);
 		this.info.add(flavs);
-		this.info.add(Box.createVerticalStrut(15));
+		this.info.add(Box.createVerticalStrut(Constants.MED_VERTICAL_GAP));
 	}
 
 	@Override
 	protected void indicateBackAction()
 	{
 		this.backBtn.addActionListener(e -> {
-			this.nav.setView(ViewId.HOME);
+			this.nav.setView(ViewId.SELECT_MODE);
 		});
 	}
 	
@@ -70,14 +71,14 @@ public class PickFlavourView extends BiPanel
 		final String [] shortNames = { "C", "V", "S" };
 		
 		final ButtonInfo[] info = {
-			new ButtonInfo("Chocolate", null, 0),
-			new ButtonInfo("Vanilla", null, 1),
-			new ButtonInfo("Strawberry", null, 2)
+			new ButtonInfo("Chocolate", ViewId.SELECT_LEVEL, 0),
+			new ButtonInfo("Vanilla", ViewId.SELECT_LEVEL, 1),
+			new ButtonInfo("Strawberry", ViewId.SELECT_LEVEL, 2)
 		};
 		
 		for (int i = 0; i < 3; i++)
 		{	
-			final JButton button = Generics.createButton(info[i].getName(), BadFonts.MID, 2);
+			final JButton button = Generics.createButton(info[i].getName(), BadFonts.MID, Constants.MED_BORDER_THICKNESS);
 			
 			final int nthOpt = info[i].getPosition();
 			button.addMouseListener(new MouseAdapter () {
@@ -96,6 +97,10 @@ public class PickFlavourView extends BiPanel
 				}
 			});
 			
+			button.addActionListener(e -> {
+				this.nav.setView(info[nthOpt].getViewId());
+			});
+			
 			button.setPreferredSize(new Dimension(120, 90));
 			button.setBackground(colors[i]);
 			
@@ -103,80 +108,3 @@ public class PickFlavourView extends BiPanel
 		}
 	}
 }
-
-/*
-public class PickFlavourView extends BiPanel
-{
-	public static boolean SINGLE_PLAYER = true;
-	
-	public PickFlavourView (final Nav nav)
-	{
-		super(nav);
-	}
-
-	@Override
-	protected void setUpInformationalContainer()
-	{
-		this.info = Generics.createGoldPanel(4);
-		this.info.setLayout(new BoxLayout(info, BoxLayout.Y_AXIS));
-		
-		final JLabel title = new JLabel("PICK UR FLAVOUR!");
-		title.setFont(BadFonts.BIG);
-		title.setAlignmentX(Component.CENTER_ALIGNMENT);	
-		
-		this.info.add(Box.createVerticalStrut(15));
-		this.info.add(title);
-		this.info.add(Box.createVerticalStrut(15));
-		
-		for (int i = 0; i < (SINGLE_PLAYER ? 1 : 2); i++)
-		{
-			final JPanel flavs = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 30));
-			flavs.setOpaque(false);
-			
-			final JLabel subtitle = new JLabel(String.format("flavour for player %d:", i + 1));
-			subtitle.setFont(BadFonts.MID);
-			subtitle.setAlignmentX(Component.CENTER_ALIGNMENT);	
-			
-			flavs.add(Box.createVerticalStrut(15));
-			flavs.add(subtitle);
-			flavs.add(Box.createVerticalStrut(15));
-			
-			this.showButtons(flavs);
-			
-			this.info.add(flavs);
-			this.info.add(Box.createVerticalStrut(15));
-			
-			System.out.println("hi");
-		}
-	}
-
-	@Override
-	protected void indicateBackAction()
-	{
-		this.backBtn.addActionListener(e -> {
-			SINGLE_PLAYER = true;
-			this.nav.setView(ViewId.HOME);
-		});
-	}
-	
-	private void showButtons (final JPanel panel)
-	{
-		final Color [] colors = {
-			BadColors.BROWN_CREAM,
-			BadColors.BEIGE_CREAM,
-			BadColors.PINK_CREAM,
-		};
-		
-		for (int i = 0; i < 3; i++)
-		{	
-			final JButton flav = Generics.createButton("", BadFonts.BIG, 2);
-			
-			final JPanel placeholder = new JPanel();
-			placeholder.setPreferredSize(new Dimension(80, 80));
-			placeholder.setBackground(colors[i]);
-			
-			flav.add(placeholder);
-			panel.add(flav);
-		}
-	}
-}*/

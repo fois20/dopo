@@ -5,13 +5,9 @@
  */
 package presentation;
 
-import java.awt.BorderLayout;
-import java.awt.Button;
 import java.awt.Component;
-import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridBagLayout;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -19,32 +15,38 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import domain.BadIceCreamException;
+
 public class SelectModeView extends BiPanel
 {
+	private static final String TITLE = "PICK A MODE!";
+	private Nav nav;
+	
 	public SelectModeView (final Nav nav)
 	{
-		super(nav);
+		super();
+		this.nav = nav;
 	}
 
 	@Override
 	protected void setUpInformationalContainer()
 	{
-		this.info = Generics.createGoldPanel(4);
+		this.info = Generics.createGoldPanel(Constants.MED_BORDER_THICKNESS);
 		this.info.setLayout(new BoxLayout(info, BoxLayout.Y_AXIS));
 		
-		final JLabel title = new JLabel("PICK A MODE!");
+		final JLabel title = new JLabel(TITLE);
 		title.setFont(BadFonts.BIG);
 		title.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
-		final JPanel modes = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 30));
+		final JPanel modes = new JPanel(new FlowLayout(FlowLayout.CENTER, Constants.MED_PADDING, Constants.MED_PADDING));
 		modes.setOpaque(false);
 		this.setUpButtons(modes);
 		
-		this.info.add(Box.createVerticalStrut(15));
+		this.info.add(Box.createVerticalStrut(Constants.MED_VERTICAL_GAP));
 		this.info.add(title);
-		this.info.add(Box.createVerticalStrut(15));
+		this.info.add(Box.createVerticalStrut(Constants.MED_VERTICAL_GAP));
 		this.info.add(modes);
-		this.info.add(Box.createVerticalStrut(15));
+		this.info.add(Box.createVerticalStrut(Constants.MED_VERTICAL_GAP));
 	}
 
 	@Override
@@ -75,14 +77,15 @@ public class SelectModeView extends BiPanel
 			
 			final int nthOpt = info[i].getPosition();
 			button.addActionListener(e -> {
-				final String view = info[nthOpt].getViewId();
-				if (view == null)
+				try
 				{
-					this.nav.unimplementedSorry(button.getName());
-					return;
-				}
-				
-				this.nav.setView(view);
+					final String view = info[nthOpt].getViewId();
+					if (view == null)
+					{
+						throw new BadIceCreamException(BadIceCreamException.ACTION_NO_IMPLEMENTED);
+					}
+					this.nav.setView(view);
+				} catch (final BadIceCreamException ex) { this.nav.error(ex.getMessage()); }
 			});
 			panel.add(button);
 		}

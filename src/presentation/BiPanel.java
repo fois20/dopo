@@ -20,12 +20,10 @@ public abstract class BiPanel extends GifPanel
 	protected JPanel info;
 	protected JPanel back;
 	protected JButton backBtn;
-	protected Nav nav;
 	
-	public BiPanel (final Nav nav)
+	public BiPanel ()
 	{
 		super(Assets.SNOW_ANIMATION);
-		this.nav = nav;
 		this.setLayout(new GridBagLayout());
 		this.setUpMainContainer();
 		this.add(this.main);
@@ -41,15 +39,15 @@ public abstract class BiPanel extends GifPanel
 		this.setUpGoBackContainer();
 		
 		this.main.add(this.info);
-        this.main.add(Box.createVerticalStrut(15));
+        this.main.add(Box.createVerticalStrut(Constants.MED_VERTICAL_GAP));
 		this.main.add(this.back);
 	}
 
 	private void setUpGoBackContainer ()
 	{
-		this.back = Generics.createGoldPanel(4);
+		this.back = Generics.createGoldPanel(Constants.MED_BORDER_THICKNESS);
 		this.back.setLayout(new FlowLayout(FlowLayout.CENTER));
-		this.backBtn = Generics.createButton("BACK", BadFonts.MID, 0);
+		this.backBtn = Generics.createButton(Constants.GO_BACK_TEXT, BadFonts.MID, Constants.NO_BORDER_THICKNESS);
 		this.indicateBackAction();
 		this.back.add(this.backBtn);
 	}
