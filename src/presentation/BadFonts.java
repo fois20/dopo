@@ -18,6 +18,8 @@ public class BadFonts
 	
 	public static final Font SMALL;
 	
+	public static final Font IN_GAME;
+	
 	static
 	{
 		Font base = new Font("Arial", Font.BOLD, 20);
@@ -27,11 +29,10 @@ public class BadFonts
 		} catch (final Exception e) {}
 		
 		BIG = base.deriveFont(25f);
-
 		MID = base.deriveFont(15f);
 		MID_HOVER = MID.deriveFont(Font.BOLD).deriveFont(19.5f);
-
 		SMALL = base.deriveFont(10f);
+		IN_GAME = base.deriveFont(Font.BOLD).deriveFont(35f);
 	}	
 	
 	private BadFonts () {}

@@ -15,6 +15,8 @@ public class BadColors
 	public static final Color PINK_CREAM;
 	public static final Color BEIGE_CREAM;
 	public static final Color BROWN_CREAM;
+	public static final Color GAME_SNOW;
+	public static final Color GAME_SCORE;
 	
 	static
 	{
@@ -23,6 +25,8 @@ public class BadColors
 		PINK_CREAM = new Color(254, 199, 197);
 		BEIGE_CREAM  = BACKGROUND;
 		BROWN_CREAM = new Color(200, 164, 98);
+		GAME_SNOW = new Color(246, 254, 254);
+		GAME_SCORE = new Color(247, 221, 85);
 	}
 	
 	private BadColors () {}

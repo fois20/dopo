@@ -7,4 +7,5 @@ public class ViewId
 	final public static String SELECT_MODE = "SELECT_MODE";
 	final public static String PICK_FLAVOUR = "PICK_FLAVOUR";
 	final public static String SELECT_LEVEL = "SELECT_LEVEL";
+	final public static String LEVEL_ONE = "LEVEL_1";
 }

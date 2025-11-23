@@ -28,8 +28,8 @@ public class GifPanel extends JPanel
 			this.background,
 			0,
 			0,
-			800,
-			800,
+			BadIceCreamGUI.WINDOW_WIDHT,
+			BadIceCreamGUI.WINDOW_HEIGHT,
 			this
 		);
 	}

@@ -47,6 +47,11 @@ public class SelectLevelView extends MonoPanel
 				button.setEnabled(false);
 				continue;
 			}
+			
+			final int pos = i + 1;
+			button.addActionListener(e -> {
+				this.nav.setView(String.format("LEVEL_%d", pos));
+			});
 		}
 		this.info.add(inner);
 	}
