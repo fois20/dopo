@@ -1,7 +1,8 @@
-/* Implements the pick a fkng flavour view, it can either show one or two panels
- * depending on the number of players (the number of player is chosen en SelectModeView.java)
+/**
+ * Implements the pick a fkng flavour view, it can either show one or two panels
+ * depending on the number of players (the number of player is chosen in {@link SelectModeView.java}
  * 
- * @author juan diego patino munoz
+ * @author juand
  */
 package presentation;
 
@@ -9,19 +10,18 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class PickFlavourView extends BiPanel
 {
 	private static final String TITLE = "PICK UR FLAVOUR!";
+
 	private Nav nav;
 	
 	public PickFlavourView (final Nav nav)

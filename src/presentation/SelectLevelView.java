@@ -1,3 +1,9 @@
+/**
+ * This class implements the view in which the user selects the level they want
+ * to play depending on what is given by {@link domain.LevelAvailableness.java}
+ * 
+ * @author juand
+ */
 package presentation;
 
 import java.awt.Dimension;
@@ -9,10 +15,10 @@ import domain.LevelAvailableness;
 
 public class SelectLevelView extends MonoPanel
 {
-	private static final String TITLE = "SELECT LEVEL";
-	private static final int LEVEL_ROWS = 8;
-	private static final int LEVEL_COLS = 5;
-	private static final int BUTTON_DIMENSION = 50;
+	private static final String TITLE            = "SELECT LEVEL";
+	private static final int    LEVEL_ROWS       = 8;
+	private static final int    LEVEL_COLS       = 5;
+	private static final int    BUTTON_DIMENSION = 50;
 
 	public SelectLevelView (final Nav nav)
 	{
@@ -24,10 +30,10 @@ public class SelectLevelView extends MonoPanel
 	{
 		this.info = Generics.createGoldPanel(Constants.NO_BORDER_THICKNESS);
 		this.info.setLayout(new FlowLayout(FlowLayout.CENTER, Constants.TINY_PADDING, Constants.TINY_PADDING));
-		
+
 		final JPanel inner = Generics.createGoldPanel(Constants.NO_BORDER_THICKNESS);
 		inner.setLayout(new GridLayout(LEVEL_ROWS, LEVEL_COLS, Constants.TINY_PADDING, Constants.TINY_PADDING));
-		
+
 		final boolean [] availableOnes = this.nav.getController().getLevelsAvailableness();
 
 		for (int i = 0; i < LevelAvailableness.NO_LEVELS; i++)
@@ -40,14 +46,14 @@ public class SelectLevelView extends MonoPanel
 
 			Generics.addHoverEffectOnButton(button, BadFonts.MID_HOVER, BadFonts.BIG);
 			button.setPreferredSize(new Dimension(BUTTON_DIMENSION, BUTTON_DIMENSION));
-			
+
 			inner.add(button);
 			if (!availableOnes[i])
 			{
 				button.setEnabled(false);
 				continue;
 			}
-			
+
 			final int pos = i + 1;
 			button.addActionListener(e -> {
 				this.nav.setView(String.format("LEVEL_%d", pos));

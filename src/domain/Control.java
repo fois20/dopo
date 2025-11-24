@@ -6,14 +6,14 @@
  */
 package domain;
 
-import presentation.LevelView;
-import presentation.MapBuilder;
+import presentation.LevelBuilder;
+import presentation.LevelArch;
 
 public class Control
 {	
 	private LevelAvailableness levelAvailableness;
-	private LevelView          levelView;
-	private LevelContext       levelContext;
+	private LevelBuilder          levelView;
+	private LevelBrain       levelContext;
 
 	/**
 	 * Inits most of the fields (the ones which does not depend on other clases)
@@ -42,9 +42,9 @@ public class Control
 	 * @param lvlview the loaded label (visual part)
 	 * @param builder the basic information of the selected level
 	 */
-	public void setUpLevelContextCommunication (final LevelView lvlview, final MapBuilder builder)
+	public void setUpLevelContextCommunication (final LevelBuilder lvlview, final LevelArch builder)
 	{
-		this.levelContext = new LevelContext(this, builder);
+		this.levelContext = new LevelBrain(this, builder);
 		this.levelView = lvlview;
 	}
 

@@ -1,8 +1,9 @@
-/* This class provides a simple template for other classes to use.
- * The main idea is to implement the background so the children
+/**
+ * This class provides a simple template for other classes to use;
+ * The main idea is to implement the background as a gif so the children
  * does not have to repeat the same code over and over again
  * 
- * @author juan diego patino munoz
+ * @author juand
  */
 package presentation;
 
@@ -14,23 +15,23 @@ import javax.swing.JPanel;
 public class GifPanel extends JPanel
 {
 	protected Image background;
-	
+
 	public GifPanel (final String path)
 	{
 		this.background = new ImageIcon(path).getImage();
 	}
-	
+
 	@Override
 	protected void paintComponent (final Graphics g)
 	{
 		super.paintComponent(g);
 		g.drawImage(
-			this.background,
-			0,
-			0,
-			BadIceCreamGUI.WINDOW_WIDHT,
-			BadIceCreamGUI.WINDOW_HEIGHT,
-			this
-		);
+				this.background,
+				0,
+				0,
+				BadIceCreamGUI.WINDOW_WIDHT,
+				BadIceCreamGUI.WINDOW_HEIGHT,
+				this
+			   );
 	}
 }

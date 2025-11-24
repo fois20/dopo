@@ -1,31 +1,35 @@
-/* Implements the home view and its modal window which provides a serie
+/**
+ * Implements the home view and its modal window which provides a serie
  * of buttons to perform different actions (play, scores, help and credits)
  * 
- * @author juan diego patino munoz
+ * @author juand
  */
 package presentation;
 
 import java.awt.Color;
-
 import java.awt.Cursor;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
-
 import javax.swing.JButton;
 import javax.swing.JPanel;
-
 import domain.BadIceCreamException;
 
 public class HomeView extends GifPanel
 {
 	private static final int MODAL_WIN_HEIGHT = (int) (BadIceCreamGUI.WINDOW_HEIGHT / 3);
-	private static final int MODAL_WIN_WIDTH = (int) (BadIceCreamGUI.WINDOW_WIDHT / 2);
+	private static final int MODAL_WIN_WIDTH  = (int) (BadIceCreamGUI.WINDOW_WIDHT / 2);
 	private static final int MODAL_NO_BUTTONS = 4;
-	
-	private JPanel glass;
-	private JPanel modal;
+
+	private JPanel  glass;
+	private JPanel  modal;
 	private JButton startBtn;
-	
+
+	/**
+	 * This method does recibe the whole BadIceCreamGUI since it's needed to create the modal
+	 * window, it in fact could be a separated JPanel but i mean, where's the aesthetic?
+	 *
+	 * @param mwin aka main window (reference the object created in {@link BadIceCreamGUI#main}
+	 */
 	public HomeView (final BadIceCreamGUI mwin)
 	{
 		super(Assets.HOME_ANIMATION);
@@ -45,12 +49,12 @@ public class HomeView extends GifPanel
 		this.glass.add(this.modal);
 		main.setGlassPane(this.glass);
 	}
-	
+
 	private void initModal (final BadIceCreamGUI main)
 	{
 		this.modal = Generics.createGoldPanel(Constants.BIG_BORDER_THICKNESS);
 		this.modal.setLayout(new GridLayout(MODAL_NO_BUTTONS, 1));
-		
+
 		this.modal.setBounds(
 			(BadIceCreamGUI.WINDOW_WIDHT - MODAL_WIN_WIDTH) / 2,
 			MODAL_WIN_HEIGHT,
@@ -60,7 +64,7 @@ public class HomeView extends GifPanel
 
 		this.initModalButtons(main);
 	}
-	
+
 	private void initModalButtons (final BadIceCreamGUI main)
 	{
 		final ButtonInfo [] info = {
@@ -69,18 +73,18 @@ public class HomeView extends GifPanel
 			new ButtonInfo ("HELP", null, 2),
 			new ButtonInfo ("CREDITS", null, 3)
 		};
-		
+
 		for (int i = 0; i < MODAL_NO_BUTTONS; i++)
 		{
 			final JButton button = Generics.createButton(info[i].getName(), BadFonts.MID, Constants.NO_BORDER_THICKNESS);
 			Generics.addHoverEffectOnButton(button, BadFonts.MID, BadFonts.MID_HOVER);
-			
+
 			final int nthOpt = info[i].getPosition();
 			button.addActionListener(e -> {
 				try
 				{
 					final String view = info[nthOpt].getViewId();
-					
+
 					if (view == null)
 					{
 						throw new BadIceCreamException(BadIceCreamException.ACTION_NO_IMPLEMENTED);
@@ -90,23 +94,21 @@ public class HomeView extends GifPanel
 					main.setView(view);
 				} catch (final BadIceCreamException ex) { main.error(ex.getMessage()); }
 			});
-			
+
 			button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			this.modal.add(button);
 		}
 	}
-	
+
 	private void initStartButton ()
 	{
 		this.startBtn = Generics.createButton("CLICK TO LICK", BadFonts.BIG, Constants.BIG_BORDER_THICKNESS);
-
 		this.startBtn.setBounds(
 			(BadIceCreamGUI.WINDOW_WIDHT - 200) / 2,
 			(BadIceCreamGUI.WINDOW_HEIGHT - 60) / 2 + (int) ((BadIceCreamGUI.WINDOW_HEIGHT - 200) * 0.40),
 			200,
 			60
 		);
-		
 		this.startBtn.addActionListener(e -> this.glass.setVisible(true));
 		this.add(this.startBtn);
 	}		

@@ -1,5 +1,15 @@
 /**
- * This is the logic behind of the visual {@link presenation.LevelView} class, it allows
+ * <pre>
+ *         .__---~~~(~~-_.
+ *      _-'  ) -~~- ) _-" )_                 Brain class :)
+ *     (  ( `-,_..`.,_--_ '_,)_
+ *    (  -_)  ( -_-~  -_ `,    )
+ *    (_ -_ _-~-__-~`, ,' )__-'))--___--~~~--__--~~--___--__..
+ *    _ ~`_-'( (____;--==,,_))))--___--~~~--__--~~--__----~~~'`=__-~+_-_.
+ *   (@) (@) `````      `-_(())_-~  mn
+ * <\pre>
+ * 
+ * This is the logic behind of the visual {@link presenation.LevelBuilder} class, it allows
  * and forbids certain operations on certain conditions
  *
  * @author juand
@@ -10,9 +20,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
 
-import presentation.MapBuilder;
+import presentation.LevelArch;
 
-public class LevelContext
+public class LevelBrain
 {	
 	private int     timeSeconds; 
 	private int     score;	
@@ -26,7 +36,7 @@ public class LevelContext
 	 * @param controller controller to make calls telling what to do to the visual part
 	 * @param builder basic logic/information of this level
 	 */
-	public LevelContext (final Control controller, final MapBuilder builder)
+	public LevelBrain (final Control controller, final LevelArch builder)
 	{
 		this.controller = controller;
 		this.timeSeconds = builder.getTime();
