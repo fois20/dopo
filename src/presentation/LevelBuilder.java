@@ -19,9 +19,12 @@
 package presentation;
 
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
 import javax.swing.JPanel;
 
-public class LevelBuilder extends JPanel
+public class LevelBuilder extends JPanel implements KeyListener
 {
 	private static final int NO_CHUNKS  = 16;
 	private static final int CHUNK_SIZE = 45;
@@ -31,9 +34,12 @@ public class LevelBuilder extends JPanel
 	 * remaining and the current score, this class also need them in order to update
 	 * those values graphically
 	 */
-	private int        seconds;
-	private int        score;
+	private int seconds;
+	private int score;
+
 	private LevelArch builder;
+	private Character ch1;
+	private Character ch2;
 
 	/**
 	 * It starts the level by taking the Navigator and the number of the map to be constructed
@@ -41,14 +47,22 @@ public class LevelBuilder extends JPanel
 	 *
 	 * @param nav navigator for communication
 	 * @param nomap map's number (@see LevelArch)
+	 * @param ch1 information about character 1
+	 * @param ch2 information about character 2
 	 */
-	public LevelBuilder (final Nav nav, final int nomap)
+	public LevelBuilder (final Nav nav, final int nomap, final Character ch1, final Character ch2)
 	{
 		this.builder = LevelArch.getMap(nomap);
+		this.ch1 = ch1;
+		this.ch2 = ch2;
 		this.setBackground(BadColors.GAME_SNOW);
 
 		nav.getController().setUpLevelContextCommunication(this, this.builder);
 		nav.getController().pauseTimer();
+		
+		this.addKeyListener(this);
+		this.setFocusable(true);
+		this.requestFocusInWindow();
 	}
 
 	@Override
@@ -56,33 +70,29 @@ public class LevelBuilder extends JPanel
 	{
 		super.paintComponent(g);
 
-		final int [][] blocks = this.builder.getPreInitIceBlocks();
-		final int [][] variants = this.builder.getFloorVariants();
+		final int [][] map = this.builder.getMap();
 
 		for (int row = 0; row < NO_CHUNKS; row++)
 		{
 			for (int col = 0; col < NO_CHUNKS; col++)
 			{
-				final boolean isDelimiter = col == 0 || row == 0 || col == NO_CHUNKS - 1 || row == NO_CHUNKS - 1;
-
-				if (isDelimiter)
-				{
-					g.drawImage(this.builder.getDelimiter(), col * CHUNK_SIZE, row * CHUNK_SIZE, CHUNK_SIZE, CHUNK_SIZE, this);
-				}
-
-				if (blocks[row][col] == 1)
-				{
-					g.drawImage(this.builder.getFloor(), col * CHUNK_SIZE, row * CHUNK_SIZE, CHUNK_SIZE, CHUNK_SIZE, this);
-				}
-
-				if (variants[row][col] == 1)
-				{
-					g.drawImage(this.builder.getVariant(), col * CHUNK_SIZE, row * CHUNK_SIZE, CHUNK_SIZE, CHUNK_SIZE, this);
-				}
+				this.decorateChunkDepeningOnMeaning(row, col, g, map);
 			}
 		}
 
 		this.displayLevelInformation(g);
+	}
+
+	private void decorateChunkDepeningOnMeaning (final int row, final int col, final Graphics g, final int [][] map)
+	{
+		final int px_x = col * CHUNK_SIZE, px_y = row * CHUNK_SIZE;
+		switch (map[row][col])
+		{
+			case MapMeaning.DELIMITER:     { g.drawImage(this.builder.getDelimiter(), px_x, px_y, CHUNK_SIZE, CHUNK_SIZE, this); break; }
+			case MapMeaning.ICE_BLOCK:     { g.drawImage(this.builder.getFloor()    , px_x, px_y, CHUNK_SIZE, CHUNK_SIZE, this); break; }
+			case MapMeaning.FLOOR_VARIANT: { g.drawImage(this.builder.getVariant() , px_x , px_y, CHUNK_SIZE, CHUNK_SIZE, this); break; }
+			case MapMeaning.PLAYER_SPAWN:  { System.out.println(this.ch1.getName()); }
+		}
 	}
 
 	private void displayLevelInformation (final Graphics g)
@@ -99,10 +109,103 @@ public class LevelBuilder extends JPanel
 		final String timer = String.format("%d:%02d", mins, secs);
 		g.drawString(timer, CHUNK_SIZE * NO_CHUNKS -  CHUNK_SIZE * 2, CHUNK_SIZE - 10);
 	}
-
+	
 	public void updateTimer (final int remaining)
 	{
 		this.seconds = remaining;
 		this.repaint();
 	}
+
+	@Override
+	public void keyPressed (final KeyEvent e)
+	{
+		switch (e.getKeyCode())
+		{
+			case KeyEvent.VK_UP:
+			{
+				break;
+			}
+			
+			case KeyEvent.VK_DOWN:
+			{
+				break;
+			}
+			
+			case KeyEvent.VK_LEFT:
+			{
+				break;
+			}
+			
+			case KeyEvent.VK_RIGHT:
+			{
+				break;
+			}
+			
+			case KeyEvent.VK_SPACE:
+			{
+				break;
+			}
+			
+			case KeyEvent.VK_P: case KeyEvent.VK_ESCAPE:
+			{
+				break;
+			}
+		}
+	}
+
+	@Override public void keyTyped (final KeyEvent e) {}
+	@Override public void keyReleased (final KeyEvent e) {}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

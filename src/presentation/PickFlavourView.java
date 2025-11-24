@@ -71,9 +71,9 @@ public class PickFlavourView extends BiPanel
 		final String [] shortNames = { "C", "V", "S" };
 		
 		final ButtonInfo[] info = {
-			new ButtonInfo("Chocolate", ViewId.SELECT_LEVEL, 0),
-			new ButtonInfo("Vanilla", ViewId.SELECT_LEVEL, 1),
-			new ButtonInfo("Strawberry", ViewId.SELECT_LEVEL, 2)
+			new ButtonInfo(Character.CHOCOLATE, ViewId.SELECT_LEVEL, 0),
+			new ButtonInfo(Character.VANILLA, ViewId.SELECT_LEVEL, 1),
+			new ButtonInfo(Character.STRAWBERRRY, ViewId.SELECT_LEVEL, 2)
 		};
 		
 		for (int i = 0; i < 3; i++)
@@ -99,6 +99,7 @@ public class PickFlavourView extends BiPanel
 			
 			button.addActionListener(e -> {
 				this.nav.setView(info[nthOpt].getViewId());
+				this.nav.setFlavourP1(info[nthOpt].getName());
 			});
 			
 			button.setPreferredSize(new Dimension(120, 90));

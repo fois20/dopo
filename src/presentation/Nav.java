@@ -14,4 +14,6 @@ public interface Nav
 	void setView (final String viewId);
 	void error (final String errmsg);
 	Control getController ();
+	void setFlavourP1 (final String flav);
+	void setFlavourP2 (final String flav);
 }

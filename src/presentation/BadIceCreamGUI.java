@@ -23,6 +23,9 @@ public class BadIceCreamGUI extends JFrame implements Nav
 	private CardLayout panelStack;
 	private JPanel     panel;
 	private Control    control;
+	
+	private Character ch1;
+	private Character ch2;
 
 	/**
 	 * Since from here is where all the visual part begins, we need to have a reference
@@ -52,6 +55,9 @@ public class BadIceCreamGUI extends JFrame implements Nav
 
 	private void initObjs ()
 	{
+		this.ch1 = Character.DUMMY1;
+		this.ch2 = Character.DUMMY2;
+		
 		this.panelStack = new CardLayout();
 		this.panel = new JPanel(this.panelStack);
 
@@ -59,7 +65,7 @@ public class BadIceCreamGUI extends JFrame implements Nav
 		this.panel.add(new SelectModeView(this), ViewId.SELECT_MODE);	
 		this.panel.add(new PickFlavourView(this), ViewId.PICK_FLAVOUR);
 		this.panel.add(new SelectLevelView(this), ViewId.SELECT_LEVEL);
-		this.panel.add(new LevelBuilder(this, LevelArch.LEVEL_1), ViewId.LEVEL_ONE);
+		this.panel.add(new LevelBuilder(this, LevelArch.LEVEL_1, this.ch1, this.ch2), ViewId.LEVEL_ONE);
 
 		this.add(this.panel);
 	}
@@ -81,6 +87,18 @@ public class BadIceCreamGUI extends JFrame implements Nav
 	{
 		return this.control;
 	}
+
+	@Override
+	public void setFlavourP1(String characterName)
+	{
+		this.ch1 = new Character(characterName);
+	}
+
+	@Override
+	public void setFlavourP2(String characterName)
+	{
+		this.ch2 = new Character(characterName);
+	}	
 
 	public static void main (final String [] args)
 	{

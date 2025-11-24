@@ -41,45 +41,26 @@ public class LevelArch
 
 	private static LevelArch map1  ()
 	{
-		final int [][] blocks = {
-			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-			{0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0},
-			{0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
-			{0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
-			{0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
-			{0, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 0},
-			{0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0},
-			{0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0},
-			{0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0},
-			{0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0},
-			{0, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 0},
-			{0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
-			{0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
-			{0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
-			{0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0},
-			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-		};
+		final int [][] map = {
+				{4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4},
+				{4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4},
+				{4, 1, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2, 1, 4},
+				{4, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 4},
+				{4, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 4},
+				{4, 1, 0, 0, 1, 1, 1, 2, 0, 1, 1, 1, 0, 0, 1, 4},
+				{4, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 4},
+				{4, 1, 2, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 4},
+				{4, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 2, 1, 4},
+				{4, 1, 0, 0, 1, 0, 0, 2, 0, 0, 0, 1, 0, 0, 1, 4},
+				{4, 1, 0, 2, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 4},
+				{4, 1, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 1, 4},
+				{4, 1, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 1, 4},
+				{4, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1, 4},
+				{4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4},
+				{4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4},
+			};
 
-		final int [][] variants = {
-			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-			{0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0},
-			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-			{0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-			{0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
-			{0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-			{0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-			{0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
-			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-		};
-
-		return new LevelArch(variants, blocks, Assets.DELIMITER_LEVEL_1, Assets.SNOW_HEAP, 120);
+		return new LevelArch(map, Assets.DELIMITER_LEVEL_1, Assets.SNOW_HEAP, 120);
 	}
 
 	private static LevelArch map2 ()
@@ -102,23 +83,20 @@ public class LevelArch
 	private Image variation;
 	private Color snowColor;
 
-	private int [][] floorVariantsLocs;
-	private int [][] preInitializatedIceBlocksLocs;
+	private int [][] map;
 	private int      givenTime;
 
 	/**
 	 * Creates the architecture by using the blueprints defined above
 	 *
-	 * @param vlocs variant floor locations
-	 * @param preblocks predefined ice blocks (the map must start with these ones)
+	 * @param map map information {@link MapMeaning.java}
 	 * @param del path to the image which will represent the delimiter for this map
 	 * @param var path to the image which will represent the variation floor for this map
 	 * @param time time given for this level
 	 */
-	public LevelArch (final int [][] vlocs, final int [][]preblocks, final String del, final String var, final int time)
+	public LevelArch (final int [][] map, final String del, final String var, final int time)
 	{
-		this.floorVariantsLocs = vlocs;
-		this.preInitializatedIceBlocksLocs = preblocks;
+		this.map = map;
 		this.delimiter = new ImageIcon(del).getImage();
 		this.variation = new ImageIcon(var).getImage();
 
@@ -128,13 +106,10 @@ public class LevelArch
 		this.givenTime = time;
 	}
 
-	public int [][] getFloorVariants () { return this.floorVariantsLocs; }
-	public int [][] getPreInitIceBlocks () { return this.preInitializatedIceBlocksLocs; }
-
+	public int [][] getMap () { return this.map; }
 	public Image getDelimiter () { return this.delimiter; }
 	public Image getFloor () { return this.iceBlock; }
 	public Image getVariant () { return this.variation; }
 	public Color getSnowColor () { return this.snowColor; }
-
 	public int getTime () { return this.givenTime; }
 }
