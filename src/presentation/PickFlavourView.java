@@ -67,9 +67,9 @@ public class PickFlavourView extends BiPanel
 	private void showButtons (final JPanel panel)
 	{
 		final Color [] colors = {
-			BadColors.BROWN_CREAM,
-			BadColors.BEIGE_CREAM,
-			BadColors.PINK_CREAM,
+			BadColors.GAME_BROWN,
+			BadColors.GAME_BEIGE,
+			BadColors.GAME_PINK,
 		};
 		
 		final String [] shortNames = { "C", "V", "S" };
@@ -82,7 +82,7 @@ public class PickFlavourView extends BiPanel
 		
 		for (int i = 0; i < 3; i++)
 		{	
-			final JButton button = Generics.createButton(info[i].getName(), BadFonts.MID, Constants.MED_BORDER_THICKNESS);
+			final JButton button = Generics.createButton(info[i].getName(), BadFonts.SMALL, Constants.MED_BORDER_THICKNESS);
 			
 			final int nthOpt = info[i].getPosition();
 			button.addMouseListener(new MouseAdapter () {
@@ -96,7 +96,7 @@ public class PickFlavourView extends BiPanel
 				@Override
 				public void mouseExited (final MouseEvent e)
 				{
-					button.setFont(BadFonts.MID);
+					button.setFont(BadFonts.SMALL);
 					button.setText(info[nthOpt].getName());
 				}
 			});

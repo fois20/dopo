@@ -42,11 +42,11 @@ public class SelectLevelView extends MonoPanel
 		{
 			final JButton button = Generics.createButton(
 				Integer.toString(i + 1),
-				BadFonts.MID_HOVER,
+				BadFonts.MEDIUM,
 				Constants.TINY_BORDER_THICKNESS
 			);
 
-			Generics.addHoverEffectOnButton(button, BadFonts.MID_HOVER, BadFonts.BIG);
+			Generics.addHoverEffectOnButton(button, BadFonts.MEDIUM, BadFonts.BIG);
 			button.setPreferredSize(new Dimension(BUTTON_DIMENSION, BUTTON_DIMENSION));
 
 			inner.add(button);

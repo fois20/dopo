@@ -71,8 +71,8 @@ public class SelectModeView extends BiPanel
 
 		for (int i = 0; i < info.length; i++)
 		{	
-			final JButton button = Generics.createButton(info[i].getName(), BadFonts.MID, 1);
-			Generics.addHoverEffectOnButton(button, BadFonts.MID, BadFonts.MID_HOVER);
+			final JButton button = Generics.createButton(info[i].getName(), BadFonts.SMALL, 1);
+			Generics.addHoverEffectOnButton(button, BadFonts.SMALL, BadFonts.MEDIUM);
 			button.setPreferredSize(size);
 			button.setMaximumSize(size);
 			button.setMinimumSize(size);

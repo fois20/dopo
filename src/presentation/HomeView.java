@@ -79,8 +79,8 @@ public class HomeView extends GifPanel
 
 		for (int i = 0; i < MODAL_NO_BUTTONS; i++)
 		{
-			final JButton button = Generics.createButton(info[i].getName(), BadFonts.MID, Constants.NO_BORDER_THICKNESS);
-			Generics.addHoverEffectOnButton(button, BadFonts.MID, BadFonts.MID_HOVER);
+			final JButton button = Generics.createButton(info[i].getName(), BadFonts.SMALL, Constants.NO_BORDER_THICKNESS);
+			Generics.addHoverEffectOnButton(button, BadFonts.SMALL, BadFonts.MEDIUM);
 
 			final int nthOpt = info[i].getPosition();
 			button.addActionListener(e -> {

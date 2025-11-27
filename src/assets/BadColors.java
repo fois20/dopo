@@ -11,23 +11,30 @@ import java.awt.Color;
 
 public class BadColors
 {
-	public static final Color BACKGROUND;
-	public static final Color BORDER;
-	public static final Color PINK_CREAM;
-	public static final Color BEIGE_CREAM;
-	public static final Color BROWN_CREAM;
+	/**
+	 * All colors related to the gui are defined here
+	 */
+	public static final Color PANEL_BACKGROUND;
+	public static final Color PANEL_BORDERS;
+
+	/**
+	 * All colors related to the game are defined here
+	 */
+	public static final Color GAME_PINK;
+	public static final Color GAME_BEIGE;
+	public static final Color GAME_BROWN;
 	public static final Color GAME_SNOW;
-	public static final Color GAME_SCORE;
+	public static final Color GAME_SCORE_FOREGROUND;
 
 	static
 	{
-		BACKGROUND  = new Color(248, 242, 226);
-		BORDER      = new Color(166, 119, 17);
-		PINK_CREAM  = new Color(254, 199, 197);
-		BEIGE_CREAM = BACKGROUND;
-		BROWN_CREAM = new Color(200, 164, 98);
+		PANEL_BACKGROUND  = new Color(248, 242, 226);
+		PANEL_BORDERS = new Color(166, 119, 17);
+		GAME_PINK  = new Color(254, 199, 197);
+		GAME_BEIGE = PANEL_BACKGROUND;
+		GAME_BROWN = new Color(200, 164, 98);
 		GAME_SNOW   = new Color(246, 254, 254);
-		GAME_SCORE  = new Color(247, 221, 85);
+		GAME_SCORE_FOREGROUND  = new Color(247, 221, 85);
 	}
 
 	private BadColors () {}

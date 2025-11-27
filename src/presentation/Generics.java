@@ -22,8 +22,8 @@ public class Generics
 	public static JPanel createGoldPanel (final int thickness)
 	{
 		final JPanel panel = new JPanel();
-		panel.setBackground(BadColors.BACKGROUND);
-		panel.setBorder(BorderFactory.createLineBorder(BadColors.BORDER, thickness));
+		panel.setBackground(BadColors.PANEL_BACKGROUND);
+		panel.setBorder(BorderFactory.createLineBorder(BadColors.PANEL_BORDERS, thickness));
 		return panel;
 	}
 
@@ -32,8 +32,8 @@ public class Generics
 		final JButton button = new JButton(message);
 		button.setName(message);
 		button.setFont(font);
-		button.setBackground(BadColors.BACKGROUND);
-		button.setBorder(BorderFactory.createLineBorder(BadColors.BORDER, thickness));
+		button.setBackground(BadColors.PANEL_BACKGROUND);
+		button.setBorder(BorderFactory.createLineBorder(BadColors.PANEL_BORDERS, thickness));
 		button.setFocusPainted(false);
 		button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		return button;

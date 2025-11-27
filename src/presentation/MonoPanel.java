@@ -46,7 +46,7 @@ public abstract class MonoPanel extends GifPanel
 
 		this.setUpInformationalContainer();
 
-		this.backBtn = Generics.createButton(Constants.GO_BACK_TEXT, BadFonts.MID, Constants.NO_BORDER_THICKNESS);
+		this.backBtn = Generics.createButton(Constants.GO_BACK_TEXT, BadFonts.SMALL, Constants.NO_BORDER_THICKNESS);
 		this.backBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
 		this.indicateBackAction();
 

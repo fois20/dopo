@@ -50,7 +50,7 @@ public abstract class BiPanel extends GifPanel
 	{
 		this.back = Generics.createGoldPanel(Constants.MED_BORDER_THICKNESS);
 		this.back.setLayout(new FlowLayout(FlowLayout.CENTER));
-		this.backBtn = Generics.createButton(Constants.GO_BACK_TEXT, BadFonts.MID, Constants.NO_BORDER_THICKNESS);
+		this.backBtn = Generics.createButton(Constants.GO_BACK_TEXT, BadFonts.SMALL, Constants.NO_BORDER_THICKNESS);
 		this.indicateBackAction();
 		this.back.add(this.backBtn);
 	}

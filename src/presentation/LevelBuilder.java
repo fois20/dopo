@@ -109,8 +109,8 @@ public class LevelBuilder extends JPanel implements KeyListener
 
 	private void displayLevelInformation (final Graphics g)
 	{
-		g.setFont(BadFonts.IN_GAME);
-		g.setColor(BadColors.GAME_SCORE);
+		g.setFont(BadFonts.HDU);
+		g.setColor(BadColors.GAME_SCORE_FOREGROUND);
 
 		final String score = String.format("1P %05d", this.score);
 		g.drawString(score, CHUNK_SIZE / 2, CHUNK_SIZE - 10);
