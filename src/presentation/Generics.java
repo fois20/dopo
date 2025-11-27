@@ -15,6 +15,8 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import assets.BadColors;
+
 public class Generics
 {
 	public static JPanel createGoldPanel (final int thickness)

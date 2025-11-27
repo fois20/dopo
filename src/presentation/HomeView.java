@@ -12,6 +12,9 @@ import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+
+import assets.Routes;
+import assets.BadFonts;
 import domain.BadIceCreamException;
 
 public class HomeView extends GifPanel
@@ -32,7 +35,7 @@ public class HomeView extends GifPanel
 	 */
 	public HomeView (final BadIceCreamGUI mwin)
 	{
-		super(Assets.HOME_ANIMATION);
+		super(Routes.CONSTANT_HOME_GIF);
 		this.setLayout(null);
 		this.initGlass(mwin);
 		this.initStartButton();

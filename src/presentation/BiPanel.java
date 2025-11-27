@@ -14,6 +14,9 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import assets.Routes;
+import assets.BadFonts;
+
 public abstract class BiPanel extends GifPanel
 {
 	protected JPanel  main;
@@ -23,7 +26,7 @@ public abstract class BiPanel extends GifPanel
 
 	public BiPanel ()
 	{
-		super(Assets.SNOW_ANIMATION);
+		super(Routes.CONSTANT_PANEL_GIF);
 		this.setLayout(new GridBagLayout());
 		this.setUpMainContainer();
 		this.add(this.main);

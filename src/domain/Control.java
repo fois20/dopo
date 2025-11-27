@@ -8,12 +8,13 @@ package domain;
 
 import presentation.LevelBuilder;
 import presentation.LevelArch;
+import presentation.Character;
 
 public class Control
 {	
 	private LevelAvailableness levelAvailableness;
-	private LevelBuilder          levelView;
-	private LevelBrain       levelContext;
+	private LevelBuilder       levelView;
+	private LevelBrain         levelContext;
 
 	/**
 	 * Inits most of the fields (the ones which does not depend on other clases)
@@ -58,6 +59,11 @@ public class Control
 	public void updateTimerBitch (final int remaining)
 	{
 		this.levelView.updateTimer(remaining);
+	}
+	
+	public MotionEndsUpIn canPlayerMove (final Character ch, final MoveTo to)
+	{
+		return this.levelContext.move(ch, to);
 	}
 
 	/**

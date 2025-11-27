@@ -19,28 +19,28 @@ package domain;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
+import presentation.Character;
 
 import presentation.LevelArch;
 
 public class LevelBrain
 {	
-	private int     timeSeconds; 
-	private int     score;	
-	private Timer   timer;
-	private Control controller;
+	private int   timeSeconds; 
+	private int   score;	
+	private Timer timer;
+	private int [][] map;
 
 	/**
 	 * this constructor should only be called from {@link Control#setUpLevelContextCommunication}
 	 * since it's the bridge between this class and the visual part
 	 *
-	 * @param controller controller to make calls telling what to do to the visual part
 	 * @param builder basic logic/information of this level
 	 */
 	public LevelBrain (final Control controller, final LevelArch builder)
 	{
-		this.controller = controller;
 		this.timeSeconds = builder.getTime();
 		this.score = 0;
+		this.map = builder.getMap();
 
 		this.timer = new Timer(1000, new ActionListener() {
 			@Override
@@ -53,8 +53,30 @@ public class LevelBrain
 				}
 			}
 		});
+		
+		this.timer.start();
+	}
+	
+	public MotionEndsUpIn move (final Character ch, final MoveTo to)
+	{	
+		final int chrow = ch.getFixedRow(), chcol = ch.getFixedCol(); 
+		int finalrow = chrow, finalcol = chcol;
+		
+		switch (to)
+		{
+			case ABOVE: { finalrow -= 1; break; }
+			case BELLOW: { finalrow += 1; break; }
+			case LEFT: { finalcol -= 1; break; }
+			case RIGHT: { finalcol += 1; break; }
+		}	
+		
+		// TODO: updte map
+		ch.setFixedPosition(finalrow, finalcol);
+		return MotionEndsUpIn.JUST_MOVED;
 	}
 
 	public void resumeTimer () { this.timer.start(); }
 	public void pauseTimer () { this.timer.stop(); }
+	
+	public int [][] getMap () { return this.map; }
 }

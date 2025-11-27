@@ -1,0 +1,8 @@
+Retrospectiva 1:
+
+1. TIEMPO          : TODO MI SABADO Y DOMINGO (ni un segundo me separe de la silla)
+2. ESTADO          : Parcialmente completo (quiza por el tiempo?)
+3. LOGRO           : No morir en el intento
+4. PROBLEMA TECNICO: El tiempo
+5. BIEN COMO EQUIPO: Estoy solo
+6. REFERENCIAS     : API de java y chatGpt modelo 5.1

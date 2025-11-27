@@ -15,6 +15,10 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import assets.BadColors;
+import assets.BadFonts;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 

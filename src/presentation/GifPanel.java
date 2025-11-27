@@ -26,12 +26,12 @@ public class GifPanel extends JPanel
 	{
 		super.paintComponent(g);
 		g.drawImage(
-				this.background,
-				0,
-				0,
-				BadIceCreamGUI.WINDOW_WIDHT,
-				BadIceCreamGUI.WINDOW_HEIGHT,
-				this
-			   );
+			this.background,
+			0,
+			0,
+			BadIceCreamGUI.WINDOW_WIDHT,
+			BadIceCreamGUI.WINDOW_HEIGHT,
+			this
+		);
 	}
 }

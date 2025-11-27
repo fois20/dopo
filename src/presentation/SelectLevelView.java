@@ -11,6 +11,8 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+
+import assets.BadFonts;
 import domain.LevelAvailableness;
 
 public class SelectLevelView extends MonoPanel
@@ -40,7 +42,7 @@ public class SelectLevelView extends MonoPanel
 		{
 			final JButton button = Generics.createButton(
 				Integer.toString(i + 1),
-				BadFonts.MID,
+				BadFonts.MID_HOVER,
 				Constants.TINY_BORDER_THICKNESS
 			);
 

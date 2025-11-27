@@ -22,6 +22,9 @@ import java.awt.Color;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 
+import assets.Routes;
+import assets.BadColors;
+
 public class LevelArch
 {
 	public static final int LEVEL_1 = 0;
@@ -39,6 +42,7 @@ public class LevelArch
 		return noMap();
 	}
 
+	// TODO: create a matrix checker
 	private static LevelArch map1  ()
 	{
 		final int [][] map = {
@@ -53,14 +57,14 @@ public class LevelArch
 				{4, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 2, 1, 4},
 				{4, 1, 0, 0, 1, 0, 0, 2, 0, 0, 0, 1, 0, 0, 1, 4},
 				{4, 1, 0, 2, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 4},
-				{4, 1, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 1, 4},
+				{4, 1, 0, 0, 0, 0, 0, 3, 5, 0, 0, 0, 0, 0, 1, 4},
 				{4, 1, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 1, 4},
 				{4, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1, 4},
 				{4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4},
 				{4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4},
 			};
 
-		return new LevelArch(map, Assets.DELIMITER_LEVEL_1, Assets.SNOW_HEAP, 120);
+		return new LevelArch(map, Routes.DELIMITER_A, Routes.FLOOR_VAR_SNOW_HEAP, 120);
 	}
 
 	private static LevelArch map2 ()
@@ -100,7 +104,7 @@ public class LevelArch
 		this.delimiter = new ImageIcon(del).getImage();
 		this.variation = new ImageIcon(var).getImage();
 
-		this.iceBlock = new ImageIcon(Assets.ICE_BLOCK).getImage();
+		this.iceBlock = new ImageIcon(Routes.ICEBLOCK_SOLID).getImage();
 		this.snowColor = BadColors.GAME_SNOW;
 
 		this.givenTime = time;

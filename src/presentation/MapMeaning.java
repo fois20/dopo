@@ -11,6 +11,7 @@ public class MapMeaning
 	public static final int EMPTY = 0;
 	public static final int ICE_BLOCK = 1;
 	public static final int FLOOR_VARIANT = 2;
-	public static final int PLAYER_SPAWN = 3;
+	public static final int PLAYER_1_IS_HERE = 3;
 	public static final int DELIMITER = 4;
+	public static final int PLAYER_2_IS_HERE = 5;
 }

@@ -2,12 +2,18 @@
  * This is the class where all starts, it creates the unique JFrame and all the
  * possible JPanels that will be used throughout the execution of the program
  * 
+ * 
+ * 
+ * TODO: remove setDeaultOperationOnClose
  * @author juand
  */
 package presentation;
 
 import java.awt.CardLayout;
 import java.awt.Dimension;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -26,6 +32,8 @@ public class BadIceCreamGUI extends JFrame implements Nav
 	
 	private Character ch1;
 	private Character ch2;
+	
+	private Map<String, JPanel> loadedviews;
 
 	/**
 	 * Since from here is where all the visual part begins, we need to have a reference
@@ -36,7 +44,10 @@ public class BadIceCreamGUI extends JFrame implements Nav
 	public BadIceCreamGUI (final Control control)
 	{	
 		this.setDefaults();
+
+		this.loadedviews = new HashMap<String, JPanel>();
 		this.control = control;
+
 		this.initObjs();	
 		this.setVisible(true);
 
@@ -55,19 +66,34 @@ public class BadIceCreamGUI extends JFrame implements Nav
 
 	private void initObjs ()
 	{
-		this.ch1 = Character.DUMMY1;
-		this.ch2 = Character.DUMMY2;
-		
 		this.panelStack = new CardLayout();
 		this.panel = new JPanel(this.panelStack);
-
-		this.panel.add(new HomeView(this), ViewId.HOME);	
-		this.panel.add(new SelectModeView(this), ViewId.SELECT_MODE);	
-		this.panel.add(new PickFlavourView(this), ViewId.PICK_FLAVOUR);
-		this.panel.add(new SelectLevelView(this), ViewId.SELECT_LEVEL);
-		this.panel.add(new LevelBuilder(this, LevelArch.LEVEL_1, this.ch1, this.ch2), ViewId.LEVEL_ONE);
-
+		this.loadView(ViewId.HOME);
 		this.add(this.panel);
+	}
+
+	private void loadView (final String id)
+	{
+		if (this.loadedviews.containsKey(id))
+		{
+			return;
+		}	
+		
+		JPanel view = null;
+		switch (id)
+		{
+			case ViewId.HOME:         { view = new HomeView(this);                                            break; }
+			case ViewId.SELECT_MODE:  { view = new SelectModeView(this);                                      break; }
+			case ViewId.PICK_FLAVOUR: { view = new PickFlavourView(this);                                     break; }
+			case ViewId.SELECT_LEVEL: { view = new SelectLevelView(this);                                     break; }
+			case ViewId.LEVEL_ONE:    { view = new LevelBuilder(this, LevelArch.LEVEL_1, this.ch1, this.ch2); break; }
+		}
+
+		if (view != null)
+		{
+			this.panel.add(view, id);
+			this.loadedviews.put(id, view);
+		}
 	}
 
 	@Override
@@ -79,6 +105,7 @@ public class BadIceCreamGUI extends JFrame implements Nav
 	@Override
 	public void setView (final String viewId)
 	{
+		this.loadView(viewId);
 		this.panelStack.show(this.panel, viewId);
 	}
 
@@ -89,13 +116,13 @@ public class BadIceCreamGUI extends JFrame implements Nav
 	}
 
 	@Override
-	public void setFlavourP1(String characterName)
+	public void setFlavourP1 (String characterName)
 	{
 		this.ch1 = new Character(characterName);
 	}
 
 	@Override
-	public void setFlavourP2(String characterName)
+	public void setFlavourP2 (String characterName)
 	{
 		this.ch2 = new Character(characterName);
 	}	

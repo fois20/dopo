@@ -21,8 +21,12 @@ package presentation;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import domain.MoveTo;
 
 import javax.swing.JPanel;
+
+import assets.BadColors;
+import assets.BadFonts;
 
 public class LevelBuilder extends JPanel implements KeyListener
 {
@@ -40,6 +44,8 @@ public class LevelBuilder extends JPanel implements KeyListener
 	private LevelArch builder;
 	private Character ch1;
 	private Character ch2;
+	
+	private Nav nav;
 
 	/**
 	 * It starts the level by taking the Navigator and the number of the map to be constructed
@@ -55,10 +61,10 @@ public class LevelBuilder extends JPanel implements KeyListener
 		this.builder = LevelArch.getMap(nomap);
 		this.ch1 = ch1;
 		this.ch2 = ch2;
+		this.nav = nav;
 		this.setBackground(BadColors.GAME_SNOW);
 
-		nav.getController().setUpLevelContextCommunication(this, this.builder);
-		nav.getController().pauseTimer();
+		this.nav.getController().setUpLevelContextCommunication(this, this.builder);
 		
 		this.addKeyListener(this);
 		this.setFocusable(true);
@@ -91,7 +97,13 @@ public class LevelBuilder extends JPanel implements KeyListener
 			case MapMeaning.DELIMITER:     { g.drawImage(this.builder.getDelimiter(), px_x, px_y, CHUNK_SIZE, CHUNK_SIZE, this); break; }
 			case MapMeaning.ICE_BLOCK:     { g.drawImage(this.builder.getFloor()    , px_x, px_y, CHUNK_SIZE, CHUNK_SIZE, this); break; }
 			case MapMeaning.FLOOR_VARIANT: { g.drawImage(this.builder.getVariant() , px_x , px_y, CHUNK_SIZE, CHUNK_SIZE, this); break; }
-			case MapMeaning.PLAYER_SPAWN:  { System.out.println(this.ch1.getName()); }
+
+			case MapMeaning.PLAYER_1_IS_HERE:
+			{
+				g.drawImage(this.ch1.getFront(), px_x, px_y, CHUNK_SIZE, CHUNK_SIZE, this);
+				this.ch1.setFixedPosition(row, col);
+				break;
+			}
 		}
 	}
 
@@ -123,6 +135,7 @@ public class LevelBuilder extends JPanel implements KeyListener
 		{
 			case KeyEvent.VK_UP:
 			{
+				this.nav.getController().canPlayerMove(this.ch1, MoveTo.ABOVE);
 				break;
 			}
 			

@@ -14,6 +14,8 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import assets.BadFonts;
 import domain.BadIceCreamException;
 
 public class SelectModeView extends BiPanel
