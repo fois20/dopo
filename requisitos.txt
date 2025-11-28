@@ -1,0 +1,5 @@
+excepciones del programador:
+	1. BadFonts: cuando no se ecuentra la fuente o el archivo es incompatible
+	
+excepciones del usuario:
+	1. Cuando un boton no tiene una accion establecida
