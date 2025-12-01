@@ -1,17 +1,25 @@
 /**    _
- *   ,' `,.			This class defines the IDs for different views (this class is not in
- *   >-.(__)		constants packages since it has more to do with panels than
- *  (_,-' |			anything else)
+ *   ,' `,.
+ *   >-.(__)
+ *  (_,-' |
  *    `.  |
  *      `.| hjw
  *        `
+ * This class defines constant identifiers for all views
+ * available in the program. These IDs are primarily used
+ * in {@link BaDopoCreamGUI#setView} to manage view navigation.
  *
+ * Using constants ensures consistent references and avoids magic strings
+ * throughout the codebase.
+ *       
  * @author juad - 2025
  */
 package presentation;
 
-public class ViewsId
-{
-	final public static String PRELUDE = "PRELUDE";
-	final public static String HOME = "HOME";
+public class ViewsId {
+	public static final String HOME_VIEW = "HOME_VIEW";
+	public static final String SELECT_MODE = "SELECT_MODE";
+	public static final String SELECT_CHARACTER = "SELECT_CHARACTER";
+	public static final String SELECT_LEVEL = "SELECT_LEVEL";
+	public static final String LEVEL = "LEVEL";
 }
