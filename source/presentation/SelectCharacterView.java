@@ -35,6 +35,8 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import domain.map.chars.CharType;
 import presentation.constants.Colors;
 import presentation.constants.Fonts;
 import presentation.constants.Paths;
@@ -106,6 +108,12 @@ public class SelectCharacterView extends BiPanel
 			new ButtonInfo("Strawberry", ViewsId.SELECT_LEVEL, 2),
 		};
 		
+		final CharType [] types = {
+			CharType.CHOCOLATE,
+			CharType.VANILLA,
+			CharType.STRAWBERRY
+		};
+		
 		for (int i = 0; i < info.length; i++) {
 			final ButtonInfo context = info[i];
 			final JButton button = Generics.createGoldenButton(context.getName(), Fonts.SMALL, Styles.BORDER_THICKNESS_MEDIUM);
@@ -114,6 +122,7 @@ public class SelectCharacterView extends BiPanel
 			
 			button.addActionListener(e -> {
 				INTER.showThisView(context.getViewId());
+				INTER.getController().setCharTypeOne(types[context.getPosition()]);
 			});
 			
 			/* TODO: move magic numbers into a constants file for button sizing

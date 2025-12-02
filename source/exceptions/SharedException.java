@@ -35,4 +35,8 @@ public class SharedException extends Exception {
     public static String invalidMapDimensions (final String dimension) {
         return String.format("the map being loaded has an invalid dimension (%s)", dimension);
     }
+    
+    public static String invalidTileId (final char id) {
+        return String.format("the tile defined by '%c' id is not known by the interpreter", id);
+    }
 }

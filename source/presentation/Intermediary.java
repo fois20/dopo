@@ -21,6 +21,7 @@ package presentation;
 import javax.swing.JPanel;
 
 import domain.Control;
+import domain.map.chars.CharType;
 
 public interface Intermediary {
 	/**

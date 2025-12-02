@@ -32,4 +32,8 @@ public class Titles {
 	public static final String PICK_MODE = "Select the mode you want to play/simulate :)";
 	public static final String SELECT_CHARACTER = "Pick the character(s) you want to play";
 	public static final String SELECT_LEVEL_GAMING = "Choose a level to smash!";
+	
+	public static String playingLevel (final int level) {
+		return String.format("Bad Dopo Cream -  Playing level %d", level);
+	}
 }

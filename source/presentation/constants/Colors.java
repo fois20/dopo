@@ -30,6 +30,7 @@ public class Colors {
 	public static final Color CHARACTER_CHOCOLATE = GAME_BROWN;
 	public static final Color CHARACTER_VANILLA = GAME_BEIGE;
 	public static final Color CHARACTER_STRAWBERRY = GAME_PINK;
+	public static final Color SNOW = GAME_LIGHT_BLUE;
 
 	public static final Color GAME_SCORE_FOREGROUND = new Color(247, 221, 85);
 }

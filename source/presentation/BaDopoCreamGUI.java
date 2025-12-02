@@ -1,18 +1,11 @@
-/**    _
- *   ,' `,.
- *   >-.(__)
- *  (_,-' |
- *    `.  |
- *      `.| hjw
- *        `
- *
+/**
  * The GUI follows a classic MVC-inspired separation: this component represents
  * the View and provides the container in which all screens (views) are displayed.
  * It is responsible for:
  *
  *  - Managing the lifecycle of the Swing JFrame that holds the entire interface.
  *
- *  - Acting as a navigation controller through a CardLayout stack, ensuring
+ *  - Acting as a navigation controller through a {@link CardLayout} stack, ensuring
  *    views are created only once and retrieved from their corresponding
  *    Singleton factories (e.g., {@link HomeView}, {@link SelectModeView}).
  *
@@ -33,21 +26,23 @@ import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import domain.Control;
+import domain.map.chars.CharType;
 import exceptions.BLogger;
 import exceptions.ProgrammerException;
 
 public class BaDopoCreamGUI extends JFrame implements Intermediary {
 	private static BaDopoCreamGUI INSTANCE = null;
-
 	private static final String WINDOW_TITLE = presentation.constants.Titles.HOME;
 
-	public static final int WINDOW_HEIGHT = 758;
-	public static final int WINDOW_WIDTH  = 735;
+	public static final int WINDOW_HEIGHT = 848;
+	public static final int WINDOW_WIDTH  = 825;
 
 	private Dimension windowDimension;
 	private CardLayout viewStack;
@@ -60,10 +55,13 @@ public class BaDopoCreamGUI extends JFrame implements Intermediary {
 	 *
 	 * @param control the controller connecting the view to the logic layer.
 	 */
-	private BaDopoCreamGUI(final Control control) {
+	private BaDopoCreamGUI (final Control control) {
+		/*
+		 * Initializates the logger since errors can happen anywhere
+		 * in the program
+		 */
 		BLogger.initLogger();
 		this.control = control;
-
 		this.initObjects();
 		this.setFrameDefaults();
 		this.setVisible(true);
@@ -75,9 +73,9 @@ public class BaDopoCreamGUI extends JFrame implements Intermediary {
 	 *  - Window dimensions
 	 *  - CardLayout navigation stack
 	 *  - Root content panel
-	 *  - Default initial view
+	 *  - etc
 	 */
-	private void initObjects() {
+	private void initObjects () {
 		this.windowDimension = new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT);
 		this.viewStack = new CardLayout();
 		this.panel = new JPanel(this.viewStack);
@@ -100,6 +98,16 @@ public class BaDopoCreamGUI extends JFrame implements Intermediary {
 		this.setPreferredSize(this.windowDimension);
 		this.setTitle(WINDOW_TITLE);
 		this.setResizable(false);
+		
+		this.addComponentListener(new java.awt.event.ComponentAdapter() {
+		    @Override
+		    public void componentResized(java.awt.event.ComponentEvent e) {
+		        int width = getWidth();
+		        int height = getHeight();
+		        System.out.println("New window size: " + width + " x " + height);
+		    }
+		});
+
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
@@ -120,14 +128,14 @@ public class BaDopoCreamGUI extends JFrame implements Intermediary {
 	 * @param viewId identifier of the view to load (see {@link ViewsId})
 	 */
 	private void setView(final String viewId) {
-		JPanel view = null;
+		JComponent view = null;
 
 		switch (viewId) {
 			case ViewsId.HOME_VIEW: view = HomeView.getInstance(this); break;
 			case ViewsId.SELECT_MODE: view = SelectModeView.getInstance(this); break;
 			case ViewsId.SELECT_CHARACTER: view = SelectCharacterView.getInstance(this); break;
 			case ViewsId.SELECT_LEVEL: view = SelectLevelView.getInstance(this); break;
-			case ViewsId.LEVEL: view = LevelView.getInstance(this); break;
+			case ViewsId.LEVEL: view = LevelView.getInstace(this); break;
 
 			default: {
 				BLogger.logError(

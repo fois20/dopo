@@ -46,4 +46,8 @@ public class ProgrammerException extends SharedException {
     public static String unimplementedLevel (final int levelNumber) {
         return String.format("attempting to play level %d, but it is not implemented", levelNumber);
     }
+    
+    public static String unreachable (final String from) {
+    	return String.format("An unreachable point has been reached???? (%s)", from);
+    }
 }

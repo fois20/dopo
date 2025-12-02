@@ -1,0 +1,8 @@
+package domain;
+
+public enum MotionEndsUp {
+	PLAYER_DIYING,
+	JUST_MOVING,
+	GOT_BLOCKED_FUCKK,
+	COLLECTING_FRUIT
+}

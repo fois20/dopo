@@ -14,20 +14,33 @@
  * @author juad
  */
 package domain;
-
-import domain.map.LevelLoader;
+import domain.map.BluePrint;
+import domain.map.Drawable;
+import domain.map.Loader;
+import domain.map.chars.CharType;
+import domain.map.chars.Character;
+import domain.map.chars.CharacterFactory;
+import domain.map.chars.Position;
+import domain.map.tiles.Tile;
+import domain.map.tiles.TileBehaviors;
 import exceptions.BLogger;
 import exceptions.SharedException;
 
 public class Control {
-
 	private LevelAvailableness levelAvailableness;
-	private LevelLoader loader;
-	private int levelNumber;
+	private int level;
+	private Loader loader;
+	private BluePrint bp;
+	
+	private Character ch1;
+	private Character ch2;
+	
+	private LevelContextualizer contextzr;
 
 	public Control () {	
 		this.levelAvailableness = new LevelAvailableness();
-		this.loader = new LevelLoader();
+		this.loader = new Loader();
+		this.contextzr = new LevelContextualizer();
 	}
 
 	/**
@@ -57,13 +70,12 @@ public class Control {
 	 * @param level Index of the level selected by the user (starting at 0).
 	 */
 	public void pleaseLoadPredefinedLevel (final int level) {
-		this.levelNumber = level;
-
 		try {
-			this.loader.loadPredefinedLevel(level);
+			this.bp = this.loader.setBluePrintToBeUsed(level);
 		} catch (final SharedException e) {
 			BLogger.logError(BLogger.SEVERE, e);
 		}
+		this.level = level;
 	}
 
 	/**
@@ -72,6 +84,29 @@ public class Control {
 	 * @return Level number selected by the user.
 	 */
 	public int pleaseIndicateTheLevelNumber () {
-		return this.levelNumber;
+		this.contextzr = this.loader.loadLevel();
+		return this.level;
+	}
+	
+	public BluePrint getBluePrint () {
+		return this.bp;
+	}
+	
+	public Tile getTileAt (final int row, final int col) {
+		return this.contextzr.getTileAt(row, col);
+	}
+		
+	public void setCharTypeOne (final CharType type) {
+		this.ch1 = CharacterFactory.get(type);
+	}
+	
+	public Character getCharacter1 () {
+		return this.ch1;
+	}
+	
+	public void characterTryingToMove (final MotionDirection towards, final Character ch) {
+		ch.move(towards, this.contextzr);
 	}
 }
+
+
