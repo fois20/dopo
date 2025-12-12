@@ -1,17 +1,21 @@
 package domain.map.chars;
 
 import java.awt.Image;
+import javax.swing.ImageIcon;
 
+import domain.GameMode;
 import domain.GoingDirection;
 import domain.LevelContextualizer;
 import domain.MotionDirection;
 import domain.MotionEndsUp;
-import domain.map.BluePrint;
-import domain.map.DrawableAdapter;
+import presentation.DrawableAdapter;
 
 public abstract class Character extends DrawableAdapter {
 	protected Position pos;
+	protected Position wishedPos;
 	protected GoingDirection lastDirection;
+	private int score;
+	protected boolean dead;
 	
 	private Image [] renderings;
 	private Image sprite;
@@ -26,7 +30,9 @@ public abstract class Character extends DrawableAdapter {
 			this.leftSprite,
 			this.rightSprite
 		};
+		this.score = 0;
 		this.lastDirection = GoingDirection.FRONT;
+		this.dead = false;
 		this.setSprite();
 	}	
 	
@@ -65,6 +71,37 @@ public abstract class Character extends DrawableAdapter {
 	public Image getCurrentSprite () {
 		return this.sprite;
 	}
+
+	public GoingDirection getGoingDirection () {
+		return this.lastDirection;
+	}
+
+	public int getScore () {
+		return this.score;
+	}
 	
-	public abstract MotionEndsUp move (final MotionDirection towards, final LevelContextualizer lc);
+	public void incScore (final int by) {
+		this.score += by;
+	}
+	
+	public void setDead () {
+		this.dead = true;
+		this.frontSprite = new ImageIcon("").getImage();
+	}
+	
+	public boolean isDead () {
+		return this.dead;
+	}
+
+	// this function is defined in order to know where the characters
+	// is indicated to move even if it does not move by external factors
+	public Position getWishedPositionToMove () {
+		return this.wishedPos;
+	}
+	
+	public abstract MotionEndsUp autonomousMode (final MotionDirection towards, final LevelContextualizer lc, final GameMode mode);
+	public abstract MotionEndsUp playableMove (final MotionDirection towards, final LevelContextualizer lc);
+	
+	public abstract boolean killsIceCream ();
+	public abstract boolean doesItMelt ();
 }

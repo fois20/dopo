@@ -31,12 +31,12 @@ public class Styles {
 	public static final int BORDER_THICKNESS_MEDIUM = 3;
 	public static final int BORDER_THICKNESS_BIG    = 6;
 
-	public static final int VERTICAL_GAP_TINY   = 8;
-	public static final int VERTICAL_GAP_MEDIUM = 15;
-	public static final int VERTICAL_GAP_BIG    = 25;
+	public static final int VERTICAL_GAP_TINY   = 4;
+	public static final int VERTICAL_GAP_MEDIUM = 11;
+	public static final int VERTICAL_GAP_BIG    = 15;
 
-	public static final int PADDING_TINY = 15;
-	public static final int PADDING_BIG  = 30;
+	public static final int PADDING_TINY = 4;
+	public static final int PADDING_BIG  = 11;
 
 	public static final String TEXT_GO_BACK_BUTTON = "BACK";
 }

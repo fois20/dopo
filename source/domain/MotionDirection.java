@@ -7,7 +7,8 @@ public enum MotionDirection {
 	UP,
 	LEFT,
 	DOWN,
-	RIGHT;
+	RIGHT,
+	AUTO;
 	
 	public static GoingDirection turnIntoGoingDirection (final MotionDirection dir) {
 		switch (dir) {

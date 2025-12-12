@@ -80,7 +80,7 @@ public class Generics {
 			@Override public void mouseExited  (final MouseEvent e) { comp.setFont(normal); }
 		});
 	}
-
+	
 	/**
 	 * Adds a hover effect to a button that temporarily changes its text.
 	 * When hovered, the button displays {@code onHover}; when the cursor

@@ -20,6 +20,7 @@ package exceptions;
 public class UserException extends SharedException {	
 	/** Message used when the user triggers an unimplemented action. */
 	public static final String UNIMPLEMENTED_ACTION = "This action is not available yet! :(";
+	public static final String UNEXISTING_FILE = "File provided to store current game state does not exist";
 	
 	/**
 	 * Creates a UserException with the given explanation.

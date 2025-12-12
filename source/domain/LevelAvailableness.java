@@ -17,23 +17,52 @@
  */
 package domain;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Scanner;
+import exceptions.BLogger;
+
 public class LevelAvailableness {
 	public static final int MAX_LEVELS = 40;
+	public static final int IMPLEMENTED_LEVELS = 4;
 	private boolean[] levelAvailableness;
+	private int availableNumberFromFile;
+	private int passedThisSession;
 
 	public LevelAvailableness () {
 		this.levelAvailableness = new boolean[MAX_LEVELS];
-		this.levelAvailableness[0] = true;
 		this.loadLevelsFromPreviousSessions();
+		
+		for (int i = 0; i < this.availableNumberFromFile + 1; i++) {
+			this.levelAvailableness[i] = true;
+		}
+		this.passedThisSession = 0;
 	}
 
-	/**
-	 * Loads previously unlocked levels from storage.
-	 * (Persistence not yet implemented.)
-	 */
 	private void loadLevelsFromPreviousSessions () {
-		// TODO: Load saved level states once persistence is added.
-	}
+        try {
+            File saveFile = new File("levels/availableness");
+            Scanner fileScanner = new Scanner(saveFile);
+            
+            if (fileScanner.hasNextInt()) {
+                this.availableNumberFromFile = fileScanner.nextInt();
+            } else {
+                this.availableNumberFromFile = 0;
+            }
+            fileScanner.close();
+        } catch (FileNotFoundException e) {
+            BLogger.logError(BLogger.SEVERE, e);
+        } catch (Exception e) {}
+        
+        if (this.availableNumberFromFile >= IMPLEMENTED_LEVELS) {
+        	this.availableNumberFromFile = IMPLEMENTED_LEVELS - 1;
+        }
+        
+        this.passedThisSession = this.availableNumberFromFile;
+    } 
 
 	/**
 	 * Marks the specified level as available to the player.
@@ -42,14 +71,21 @@ public class LevelAvailableness {
 	 */
 	public void setLevelAsAvaialble (final int level) {
 		this.levelAvailableness[level] = true;
+		this.passedThisSession++;
 	}
 
 	/**
 	 * Saves any changes made to the level availability state.
-	 * (Persistence not yet implemented.)
 	 */
 	public void saveChanges () {
-		System.out.println("TODO: saving changes with respect to levels: To be implemented...");
+	    try {
+	        FileWriter fileWriter = new FileWriter("levels/availableness", false);
+	        PrintWriter printWriter = new PrintWriter(fileWriter);
+	        printWriter.print(this.passedThisSession > this.availableNumberFromFile ? this.passedThisSession : this.availableNumberFromFile);
+	        printWriter.close();
+	    } catch (IOException e) {
+	    	BLogger.logError(BLogger.SEVERE, e);
+	    }
 	}
 
 	/**

@@ -125,7 +125,7 @@ public class HomeView extends GifPanel {
 	private void initModalPanelButtons () {
 		final ButtonInfo [] info = {
 			new ButtonInfo("PLAY",    ViewsId.SELECT_MODE, 0),
-			new ButtonInfo("SCORES",  null, 1),
+			new ButtonInfo("LOAD",    null, 1),
 			new ButtonInfo("HELP",    null, 2),
 			new ButtonInfo("CREDITS", null, 3),
 		};
@@ -142,9 +142,18 @@ public class HomeView extends GifPanel {
 
 			button.addActionListener(e -> {
 				try {
-					if (context.getViewId() == null) {
+					if (context.getName() == "LOAD") {
+						INTER.getController().loadStateFromFile(
+							INTER.getController().pickFile()
+						);
+						this.glass.setVisible(false);
+						INTER.showThisView(ViewsId.LEVEL);
+						return;
+					}
+					else if (context.getViewId() == null) {
 						throw new UserException(UserException.UNIMPLEMENTED_ACTION);
 					}
+					
 
 					this.glass.setVisible(false);
 					INTER.showThisView(context.getViewId());

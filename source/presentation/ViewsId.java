@@ -19,7 +19,11 @@ package presentation;
 public class ViewsId {
 	public static final String HOME_VIEW = "HOME_VIEW";
 	public static final String SELECT_MODE = "SELECT_MODE";
-	public static final String SELECT_CHARACTER = "SELECT_CHARACTER";
+	public static final String ONE_ICE_CREAM = "ONE_ICE_CREAM";
+	public static final String TWO_ICE_CREAM = "TWO_ICE_CREAM";
+	public static final String OPP_VS_ICE = "OPP_VS_ICE";
+	public static final String SIMULATION = "SIMULATION";
+	
 	public static final String SELECT_LEVEL = "SELECT_LEVEL";
 	public static final String LEVEL = "LEVEL";
 }

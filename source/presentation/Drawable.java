@@ -1,4 +1,4 @@
-package domain.map;
+package presentation;
 
 import java.awt.Image;
 
@@ -7,5 +7,5 @@ public interface Drawable {
 	Image getBackSideSprite ();
 	Image getRightSideSprite ();
 	Image getLeftSideSprite ();
-	Image getBrokenSideSprite ();
+	Image getAlternativeSprite ();
 }

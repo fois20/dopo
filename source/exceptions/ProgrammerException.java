@@ -50,4 +50,12 @@ public class ProgrammerException extends SharedException {
     public static String unreachable (final String from) {
     	return String.format("An unreachable point has been reached???? (%s)", from);
     }
+    
+    public static String malformedMap (final String line) {
+    	return String.format("Malformed map. Check line: '%s'", line);
+    }
+
+    public static String unspecifiedP1Pos (final String path) {
+    	return String.format("please specify a spawn position for player 1: %s", path);
+    }
 }

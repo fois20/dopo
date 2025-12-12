@@ -86,10 +86,10 @@ public class SelectModeView extends BiPanel {
 	 */
 	private void setUpButtons (final JPanel panel) {
 		final ButtonInfo [] info = {
-			new ButtonInfo("Solo", ViewsId.SELECT_CHARACTER, 0),
-			new ButtonInfo("W/ Fried", null, 1),
-			new ButtonInfo("Vs Fried", null, 2),
-			new ButtonInfo("Simulation", null, 3)
+			new ButtonInfo("Solo", ViewsId.ONE_ICE_CREAM, 0),
+			new ButtonInfo("W/ Fried", ViewsId.TWO_ICE_CREAM, 1),
+			new ButtonInfo("Vs Fried", ViewsId.OPP_VS_ICE, 2),
+			new ButtonInfo("Simulation", ViewsId.SIMULATION, 3)
 		};
 		
 		final Dimension buttonsize = new Dimension(150, 60);

@@ -1,14 +1,16 @@
 package domain.map.chars.cream;
 
+import domain.map.tiles.TileId;
 import presentation.constants.Paths;
 
 public class Strawberry extends IceCream {
-	private static final String SPRITE_FRONT_PATH = Paths.SPRITE_CHAR_STRAWBERRY_FRONT;
-	private static final String SPRITE_BACK_PATH = Paths.SPRITE_CHAR_STRAWBERRY_BACK;
-	private static final String SPRITE_LEFT_PATH = Paths.SPRITE_CHAR_STRAWBERRY_LEFT;
-	private static final String SPRITE_RIGHT_PATH = Paths.SPRITE_CHAR_STRAWBERRY_RIGHT;
+	private static final String SPRITE_FRONT_PATH = "assets/characters/strawberry/front.png";
+	private static final String SPRITE_BACK_PATH = "assets/characters/strawberry/back.png";
+	private static final String SPRITE_LEFT_PATH = "assets/characters/strawberry/left.png"; 
+	private static final String SPRITE_RIGHT_PATH = "assets/characters/strawberry/right.png";
+	public static final String SPRITE_DEAD_PATH = "assets/characters/strawberry/dead.png";
 	
 	public Strawberry () {
-		super(SPRITE_FRONT_PATH, SPRITE_BACK_PATH, SPRITE_LEFT_PATH, SPRITE_RIGHT_PATH);
+		super(SPRITE_FRONT_PATH, SPRITE_BACK_PATH, SPRITE_LEFT_PATH, SPRITE_RIGHT_PATH, TileId.DEAD_STRAWBERRY);
 	}
 }

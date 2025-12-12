@@ -42,6 +42,6 @@ public class Fonts {
 		BIG = base.deriveFont(25f);
 
 		/* TODO: FIx this whenever we get there */
-		HDU = BIG;
+		HDU = BIG.deriveFont(30f);
 	}
 }

@@ -21,7 +21,7 @@
  *
  * @author juad - 2025
  */
-package presentation;
+package presentation.selecting;
 
 import presentation.constants.Titles;
 import presentation.recycle.BiPanel;
@@ -36,21 +36,25 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import domain.GameMode;
 import domain.map.chars.CharType;
+import presentation.ButtonInfo;
+import presentation.Intermediary;
+import presentation.ViewsId;
 import presentation.constants.Colors;
 import presentation.constants.Fonts;
 import presentation.constants.Paths;
 import presentation.constants.Styles;
 
-public class SelectCharacterView extends BiPanel
+public class SingleIceCreamView extends BiPanel
 {
-	private static SelectCharacterView INSTANCE;
+	private static SingleIceCreamView INSTANCE;
 	private static Intermediary INTER;
 	
 	private static final String TITLE = Titles.SELECT_CHARACTER;
 	private static final String GIF = Paths.GIF_GENERAL;
 	
-	public SelectCharacterView () {
+	public SingleIceCreamView () {
 		super(GIF);
 	}
 	
@@ -121,13 +125,14 @@ public class SelectCharacterView extends BiPanel
 			Generics.styleChangeTextOnHover(button, context.getName(), shortnames[context.getPosition()]);
 			
 			button.addActionListener(e -> {
-				INTER.showThisView(context.getViewId());
+                INTER.getController().setGameMode(GameMode.ONE_ICE_CREAM);
 				INTER.getController().setCharTypeOne(types[context.getPosition()]);
+				INTER.showThisView(context.getViewId());
 			});
 			
 			/* TODO: move magic numbers into a constants file for button sizing
 			 * @link SelectLevelView
-			 * @link SelectCharacterView
+			 * @link SingleIceCreamView
 			 */
 			button.setPreferredSize(new Dimension(120, 90));
 			button.setBackground(colors[context.getPosition()]);
@@ -141,12 +146,12 @@ public class SelectCharacterView extends BiPanel
 	 * Also sets the window title for the active view.
 	 *
 	 * @param inter the intermediary used to communicate with the main frame
-	 * @return the unique instance of SelectCharacterView
+	 * @return the unique instance of SingleIceCreamView
 	 */
-	public static SelectCharacterView getInstance (final Intermediary inter) {
+	public static SingleIceCreamView getInstance (final Intermediary inter) {
 		if (INSTANCE == null) {
 			INTER = inter;
-			INSTANCE = new SelectCharacterView();
+			INSTANCE = new SingleIceCreamView();
 		}
 		INTER.setViewTitle(TITLE);
 		return INSTANCE;
